@@ -1,0 +1,411 @@
+### Page state
+- Page URL: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/20
+- Page Title: Test runtime crash missing stack trace · Issue #20 · KeerthiYasasvi/Reddit-ELT-Pipeline
+- Page Snapshot:
+```yaml
+- generic [ref=e2]:
+  - region:
+    - generic:
+      - tooltip "You are the owner of the Reddit-ELT-Pipeline repository."
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner "Global Navigation Menu" [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - button "Open Menu" [ref=e11] [cursor=pointer]:
+            - img [ref=e12]
+          - link "Homepage (g then d)" [ref=e14] [cursor=pointer]:
+            - /url: https://github.com/
+            - img [ref=e15]
+        - generic [ref=e17]:
+          - navigation "Breadcrumbs" [ref=e18]:
+            - list [ref=e19]:
+              - listitem [ref=e20]:
+                - link "KeerthiYasasvi" [ref=e21] [cursor=pointer]:
+                  - /url: /KeerthiYasasvi
+                  - generic [ref=e22]: KeerthiYasasvi
+              - listitem [ref=e23]:
+                - link "Reddit-ELT-Pipeline" [ref=e24] [cursor=pointer]:
+                  - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline
+                  - generic [ref=e25]: Reddit-ELT-Pipeline
+          - button "Search or jump to… (s,/)" [ref=e26] [cursor=pointer]:
+            - img [ref=e27]
+        - button "Open user navigation menu" [ref=e30] [cursor=pointer]:
+          - img "Yasasvi Keerthi" [ref=e31]
+      - heading "Repository navigation" [level=2] [ref=e32]
+      - navigation "Repository" [ref=e33]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link "Code" [ref=e36] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline
+              - generic [ref=e37]: Code
+          - listitem [ref=e38]:
+            - link "Issues (17)" [ref=e39] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/issues
+              - generic [ref=e40]: Issues
+              - generic [ref=e41]:
+                - generic [ref=e42]: "17"
+                - generic [ref=e43]: (17)
+          - listitem [ref=e44]:
+            - link "Pull requests" [ref=e45] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/pulls
+              - generic [ref=e46]: Pull requests
+          - listitem [ref=e47]:
+            - link "Discussions" [ref=e48] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/discussions
+              - generic [ref=e49]: Discussions
+          - listitem [ref=e50]:
+            - link "Actions" [ref=e51] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/actions
+              - generic [ref=e52]: Actions
+          - listitem [ref=e53]:
+            - link "Projects" [ref=e54] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/projects
+              - generic [ref=e55]: Projects
+          - listitem [ref=e56]:
+            - link "Security" [ref=e57] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/security
+              - generic [ref=e58]: Security
+          - listitem [ref=e59]:
+            - button "More Repository items" [ref=e61] [cursor=pointer]:
+              - generic [ref=e64]:
+                - text: More
+                - generic [ref=e65]: Repository items
+              - generic:
+                - img
+  - main [ref=e69]:
+    - generic [ref=e75]:
+      - region "Header" [ref=e77]:
+        - generic [ref=e78]:
+          - 'heading "Test runtime crash missing stack trace #20" [level=1] [ref=e80]'
+          - generic [ref=e83]:
+            - button "Edit issue title" [ref=e84] [cursor=pointer]:
+              - generic [ref=e86]: Edit
+            - link "New issue" [ref=e88] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/issues/new/choose
+              - generic [ref=e90]: New issue
+            - button "Copy link" [ref=e91] [cursor=pointer]:
+              - img [ref=e92]
+      - generic [ref=e100]:
+        - img "Issue" [ref=e101]
+        - text: Open
+      - generic [ref=e388]:
+        - generic [ref=e390]:
+          - img "Issue" [ref=e391]
+          - text: Open
+        - generic [ref=e395]:
+          - link "Test runtime crash missing stack trace" [ref=e396] [cursor=pointer]:
+            - /url: "#top"
+          - generic [ref=e397]: "#20"
+        - button "Copy link" [ref=e400] [cursor=pointer]:
+          - img [ref=e401]
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - generic [ref=e109]:
+            - heading "Description" [level=2] [ref=e110]
+            - generic [ref=e112]:
+              - generic [ref=e114]:
+                - link "@KeerthiYasasvi's profile" [ref=e116] [cursor=pointer]:
+                  - /url: https://github.com/KeerthiYasasvi
+                  - img "@KeerthiYasasvi" [ref=e117]
+                - generic [ref=e118]:
+                  - link "KeerthiYasasvi" [ref=e120] [cursor=pointer]:
+                    - /url: https://github.com/KeerthiYasasvi
+                  - generic [ref=e121]:
+                    - text: opened
+                    - link "on Jan 14, 20261 minute ago" [ref=e404] [cursor=pointer]:
+                      - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/20#issue-3811138578
+                      - generic "Jan 13, 2026, 7:17 PM CST" [ref=e123]: on Jan 14, 20261 minute ago
+                - generic [ref=e125]:
+                  - generic "You are the owner of the Reddit-ELT-Pipeline repository." [ref=e127]: Owner
+                  - button "Issue body actions" [ref=e129] [cursor=pointer]:
+                    - img [ref=e130]
+              - generic [ref=e132]:
+                - paragraph [ref=e135]: The application crashes randomly during data processing. It seems to happen after a few minutes of running but I haven't seen the actual error yet. I'm using Python 3.9 on macOS. The process just exits without any error message showing up. How can I figure out what's happening?
+                - generic [ref=e136]:
+                  - generic [ref=e139]:
+                    - button "Create sub-issue" [ref=e141] [cursor=pointer]:
+                      - generic [ref=e143]: Create sub-issue
+                    - button "View more sub-issue options" [ref=e145] [cursor=pointer]:
+                      - img [ref=e146]
+                  - toolbar "Reactions" [ref=e148]:
+                    - button "React" [ref=e149] [cursor=pointer]:
+                      - img [ref=e150]
+          - generic [ref=e153]:
+            - generic [ref=e405]:
+              - heading "Activity" [level=2] [ref=e154]
+              - generic [ref=e414]:
+                - generic [ref=e416]:
+                  - heading "github-actions commented on Jan 13, 2026 now" [level=3] [ref=e417]:
+                    - text: github-actions commented
+                    - generic "Jan 13, 2026, 7:18 PM CST" [ref=e418]: on Jan 13, 2026 now
+                  - link "@github-actions's profile" [ref=e420] [cursor=pointer]:
+                    - /url: /apps/github-actions
+                    - img "@github-actions" [ref=e421]
+                  - generic [ref=e422]:
+                    - generic [ref=e423]:
+                      - link "github-actions" [ref=e424] [cursor=pointer]:
+                        - /url: /apps/github-actions
+                      - generic [ref=e425]: bot
+                    - generic [ref=e427]:
+                      - link "on Jan 13, 2026now" [ref=e428] [cursor=pointer]:
+                        - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/20#issuecomment-3747261642
+                        - generic "Jan 13, 2026, 7:18 PM CST" [ref=e429]: on Jan 13, 2026now
+                      - generic [ref=e430]:
+                        - text: – with
+                        - link "GitHub Actions" [ref=e431] [cursor=pointer]:
+                          - /url: https://help.github.com/en/actions
+                  - button "Actions for github-actions's comment, 7:18 PM today" [ref=e435] [cursor=pointer]:
+                    - img [ref=e436]
+                - generic [ref=e438]:
+                  - generic [ref=e440]:
+                    - paragraph [ref=e441]:
+                      - link "@KeerthiYasasvi" [ref=e442] [cursor=pointer]:
+                        - /url: https://github.com/KeerthiYasasvi
+                    - paragraph [ref=e443]: 👋 Hi! I need a bit more information to help route this issue effectively.
+                    - paragraph [ref=e444]:
+                      - strong [ref=e445]: 1. Could you please provide the full error message and stack trace, if available? This will help us understand where the application is failing.
+                      - text: __
+                    - paragraph [ref=e446]:
+                      - strong [ref=e447]: 2. Can you describe the steps to reproduce the issue? This includes any specific actions or inputs that lead to the crash.
+                      - text: __
+                    - paragraph [ref=e448]:
+                      - strong [ref=e449]: 3. What input data are you using when the crash occurs? Sharing a sample of this data can help us replicate the issue.
+                      - text: __
+                    - separator [ref=e450]
+                    - paragraph [ref=e451]:
+                      - emphasis [ref=e452]: This is follow-up round 1 of 3. Please provide as much detail as possible.
+                    - heading "📝 Quick Commands" [level=3] [ref=e453]
+                    - list [ref=e454]:
+                      - listitem [ref=e455]:
+                        - strong [ref=e456]:
+                          - code [ref=e457]: /stop
+                        - text: "- Stop asking me questions on this issue (opt-out)"
+                      - listitem [ref=e458]:
+                        - strong [ref=e459]:
+                          - code [ref=e460]: /diagnose
+                        - text: "- Activate the bot for your specific sub-issue or different problem (for other users in this thread)"
+                  - toolbar "Reactions" [ref=e461]:
+                    - button "React" [ref=e462] [cursor=pointer]:
+                      - img [ref=e463]
+            - generic [ref=e156]:
+              - link "@KeerthiYasasvi's profile" [ref=e157] [cursor=pointer]:
+                - /url: /KeerthiYasasvi
+                - img "KeerthiYasasvi" [ref=e158]
+              - heading "Add a comment" [level=2] [ref=e159]
+              - group "new Comment" [ref=e164]:
+                - generic [ref=e165] [cursor=pointer]: new Comment
+                - generic [ref=e166]:
+                  - generic [ref=e167]: "Markdown input: edit mode selected."
+                  - generic [ref=e168]:
+                    - generic [ref=e169]:
+                      - navigation "View mode" [ref=e173]:
+                        - tablist [ref=e174]:
+                          - tab "Write" [selected] [ref=e175] [cursor=pointer]
+                          - tab "Preview" [ref=e176] [cursor=pointer]
+                      - toolbar "Formatting tools" [ref=e177]:
+                        - generic [ref=e178]:
+                          - button "Heading" [ref=e179] [cursor=pointer]:
+                            - img [ref=e180]
+                          - button "Bold" [ref=e182] [cursor=pointer]:
+                            - img [ref=e183]
+                          - button "Italic" [ref=e185] [cursor=pointer]:
+                            - img [ref=e186]
+                        - generic [ref=e189]:
+                          - button "Quote" [ref=e190] [cursor=pointer]:
+                            - img [ref=e191]
+                          - button "Code" [ref=e193] [cursor=pointer]:
+                            - img [ref=e194]
+                          - button "Link" [ref=e196] [cursor=pointer]:
+                            - img [ref=e197]
+                        - generic [ref=e200]:
+                          - button "Unordered list" [ref=e201] [cursor=pointer]:
+                            - img [ref=e202]
+                          - button "Numbered list" [ref=e204] [cursor=pointer]:
+                            - img [ref=e205]
+                          - button "Task list" [ref=e207] [cursor=pointer]:
+                            - img [ref=e208]
+                        - generic [ref=e211]:
+                          - button "Mention" [ref=e212] [cursor=pointer]:
+                            - img [ref=e213]
+                          - button "Reference" [ref=e215] [cursor=pointer]:
+                            - img [ref=e216]
+                        - button "Saved replies" [ref=e218] [cursor=pointer]:
+                          - img [ref=e219]
+                        - button "Slash commands" [ref=e221] [cursor=pointer]:
+                          - img [ref=e222]
+                    - textbox "Add a comment" [ref=e227]:
+                      - /placeholder: Use Markdown to format your comment
+                    - alert
+                  - generic [ref=e228]:
+                    - button "Paste, drop, or click to add files" [ref=e231] [cursor=pointer]:
+                      - generic [ref=e232]:
+                        - generic:
+                          - img
+                        - generic [ref=e234]: Paste, drop, or click to add files
+                    - generic [ref=e235]:
+                      - generic [ref=e236]:
+                        - button "Close issue" [ref=e238] [cursor=pointer]:
+                          - generic [ref=e239]:
+                            - generic:
+                              - img
+                            - generic [ref=e240]: Close issue
+                        - button "More options" [ref=e242] [cursor=pointer]:
+                          - img [ref=e243]
+                      - tooltip "Comment can not be empty" [ref=e245]:
+                        - button "Comment" [disabled] [ref=e246]:
+                          - generic [ref=e248]: Comment
+        - generic [ref=e250]:
+          - heading "Metadata" [level=2] [ref=e251]
+          - generic [ref=e253]:
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - heading "Assignees" [level=3]
+                - button "Edit Assignees" [ref=e257] [cursor=pointer]:
+                  - generic [ref=e258]: Edit Assignees
+                  - generic:
+                    - img
+              - generic [ref=e259]:
+                - text: No one -
+                - button "Assign yourself" [ref=e260] [cursor=pointer]:
+                  - generic [ref=e262]: Assign yourself
+            - generic [ref=e264]:
+              - generic [ref=e265]:
+                - heading "Labels" [level=3]
+                - button "Edit Labels" [ref=e266] [cursor=pointer]:
+                  - generic [ref=e267]: Edit Labels
+                  - generic:
+                    - img
+              - generic [ref=e268]: No labels
+            - generic [ref=e270]:
+              - generic [ref=e271]:
+                - heading "Projects" [level=3]
+                - button "Edit Projects" [ref=e272] [cursor=pointer]:
+                  - generic [ref=e273]: Edit Projects
+                  - generic:
+                    - img
+              - generic [ref=e274]: No projects
+            - generic [ref=e276]:
+              - generic [ref=e277]:
+                - heading "Milestone" [level=3]
+                - button "Edit Milestone" [ref=e278] [cursor=pointer]:
+                  - generic [ref=e279]: Edit Milestone
+                  - generic:
+                    - img
+              - generic [ref=e280]: No milestone
+            - generic [ref=e282]:
+              - generic [ref=e283]:
+                - heading "Relationships" [level=3]
+                - button "Edit Relationships" [ref=e284] [cursor=pointer]:
+                  - generic [ref=e285]: Edit Relationships
+                  - generic:
+                    - img
+              - generic [ref=e286]: None yet
+            - generic [ref=e287]:
+              - generic [ref=e289]:
+                - heading "Development" [level=3]
+                - button "Edit Development" [ref=e290] [cursor=pointer]:
+                  - generic [ref=e291]: Edit Development
+                  - generic:
+                    - img
+              - generic [ref=e292]:
+                - generic [ref=e294]:
+                  - button "Code with agent mode" [ref=e296] [cursor=pointer]:
+                    - generic [ref=e297]:
+                      - generic:
+                        - img
+                      - generic [ref=e298]: Code with agent mode
+                  - button "Select code repository" [ref=e301] [cursor=pointer]:
+                    - img [ref=e302]
+                - generic [ref=e304]:
+                  - button "Create a branch" [ref=e305] [cursor=pointer]:
+                    - generic [ref=e307]: Create a branch
+                  - text: for this issue or link a pull request.
+                - list
+            - generic [ref=e308]:
+              - generic [ref=e310]:
+                - heading "Notifications" [level=3]
+                - button "Customize" [ref=e311] [cursor=pointer]
+              - generic [ref=e313]:
+                - button "Unsubscribe" [ref=e314] [cursor=pointer]:
+                  - generic [ref=e315]:
+                    - generic:
+                      - img
+                    - generic [ref=e316]: Unsubscribe
+                - paragraph [ref=e317]: You're receiving notifications because you're subscribed to this thread.
+            - generic [ref=e318]:
+              - generic [ref=e320]:
+                - heading "Participants" [level=3]
+              - link "@KeerthiYasasvi" [ref=e324] [cursor=pointer]:
+                - /url: /KeerthiYasasvi
+                - img "@KeerthiYasasvi" [ref=e325]
+            - heading "Issue actions" [level=2] [ref=e326]
+            - list [ref=e327]:
+              - listitem [ref=e328]:
+                - button "Transfer issue" [ref=e329] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e331]: Transfer issue
+              - listitem [ref=e332]:
+                - button "Duplicate issue" [ref=e333] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e335]: Duplicate issue
+              - listitem [ref=e336]:
+                - button "Lock conversation" [ref=e337] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e339]: Lock conversation
+              - listitem [ref=e340]:
+                - button "Up to 3 issues can be pinned to the top of the issues page" [ref=e341] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - tooltip "Up to 3 issues can be pinned to the top of the issues page" [ref=e344]: Pin issue
+              - listitem [ref=e345]:
+                - button "Delete issue" [ref=e346] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e348]: Delete issue
+              - listitem [ref=e349]:
+                - button "Give feedback" [ref=e350] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e352]: Give feedback
+  - contentinfo [ref=e353]:
+    - heading "Footer" [level=2] [ref=e354]
+    - generic [ref=e355]:
+      - generic [ref=e356]:
+        - link "GitHub Homepage" [ref=e357] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e358]
+        - generic [ref=e360]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e361]:
+        - heading "Footer navigation" [level=3] [ref=e362]
+        - list "Footer navigation" [ref=e363]:
+          - listitem [ref=e364]:
+            - link "Terms" [ref=e365] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e366]:
+            - link "Privacy" [ref=e367] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e368]:
+            - link "Security" [ref=e369] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e370]:
+            - link "Status" [ref=e371] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e372]:
+            - link "Community" [ref=e373] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e374]:
+            - link "Docs" [ref=e375] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e376]:
+            - link "Contact" [ref=e377] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e378]:
+            - button "Manage cookies" [ref=e380] [cursor=pointer]
+          - listitem [ref=e381]:
+            - button "Do not share my personal information" [ref=e383] [cursor=pointer]
+```

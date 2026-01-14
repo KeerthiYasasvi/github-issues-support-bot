@@ -1,0 +1,738 @@
+### Page state
+- Page URL: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15
+- Page Title: PostgreSQL connection pool exhaustion in transform task · Issue #15 · KeerthiYasasvi/Reddit-ELT-Pipeline
+- Page Snapshot:
+```yaml
+- generic [ref=e2]:
+  - region:
+    - generic:
+      - tooltip "You are the owner of the Reddit-ELT-Pipeline repository."
+    - generic:
+      - tooltip "You are the author of this issue"
+    - generic:
+      - tooltip "You are the owner of the Reddit-ELT-Pipeline repository."
+    - generic:
+      - tooltip "You are the author of this issue"
+    - generic:
+      - tooltip "You are the owner of the Reddit-ELT-Pipeline repository."
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner "Global Navigation Menu" [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - button "Open Menu" [ref=e11] [cursor=pointer]:
+            - img [ref=e12]
+          - link "Homepage (g then d)" [ref=e14] [cursor=pointer]:
+            - /url: https://github.com/
+            - img [ref=e15]
+        - generic [ref=e17]:
+          - navigation "Breadcrumbs" [ref=e18]:
+            - list [ref=e19]:
+              - listitem [ref=e20]:
+                - link "KeerthiYasasvi" [ref=e21] [cursor=pointer]:
+                  - /url: /KeerthiYasasvi
+                  - generic [ref=e22]: KeerthiYasasvi
+              - listitem [ref=e23]:
+                - link "Reddit-ELT-Pipeline" [ref=e24] [cursor=pointer]:
+                  - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline
+                  - generic [ref=e25]: Reddit-ELT-Pipeline
+          - button "Search or jump to… (s,/)" [ref=e26] [cursor=pointer]:
+            - img [ref=e27]
+        - button "Open user navigation menu" [ref=e33] [cursor=pointer]:
+          - img "Yasasvi Keerthi" [ref=e34]
+      - heading "Repository navigation" [level=2] [ref=e35]
+      - navigation "Repository" [ref=e36]:
+        - list [ref=e37]:
+          - listitem [ref=e38]:
+            - link "Code" [ref=e39] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline
+              - generic [ref=e40]: Code
+          - listitem [ref=e41]:
+            - link "Issues (12)" [ref=e42] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/issues
+              - generic [ref=e43]: Issues
+              - generic [ref=e44]:
+                - generic [ref=e45]: "12"
+                - generic [ref=e46]: (12)
+          - listitem [ref=e47]:
+            - link "Pull requests" [ref=e48] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/pulls
+              - generic [ref=e49]: Pull requests
+          - listitem [ref=e50]:
+            - link "Discussions" [ref=e51] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/discussions
+              - generic [ref=e52]: Discussions
+          - listitem [ref=e53]:
+            - link "Actions" [ref=e54] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/actions
+              - generic [ref=e55]: Actions
+          - listitem [ref=e56]:
+            - link "Projects" [ref=e57] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/projects
+              - generic [ref=e58]: Projects
+          - listitem [ref=e59]:
+            - link "Security" [ref=e60] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/security
+              - generic [ref=e61]: Security
+          - listitem [ref=e62]:
+            - button "More Repository items" [ref=e64] [cursor=pointer]:
+              - generic [ref=e67]:
+                - text: More
+                - generic [ref=e68]: Repository items
+              - generic:
+                - img
+  - main [ref=e72]:
+    - generic [ref=e78]:
+      - region "Header" [ref=e80]:
+        - generic [ref=e81]:
+          - 'heading "PostgreSQL connection pool exhaustion in transform task #15" [level=1] [ref=e83]'
+          - generic [ref=e86]:
+            - button "Edit issue title" [ref=e87] [cursor=pointer]:
+              - generic [ref=e89]: Edit
+            - link "New issue" [ref=e91] [cursor=pointer]:
+              - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/issues/new/choose
+              - generic [ref=e93]: New issue
+            - button "Copy link" [ref=e94] [cursor=pointer]:
+              - img [ref=e95]
+      - generic [ref=e103]:
+        - img "Issue" [ref=e104]
+        - text: Open
+      - generic [ref=e107]:
+        - generic [ref=e108]:
+          - generic [ref=e109]: Assignees
+          - link "KeerthiYasasvi is assigned" [ref=e113] [cursor=pointer]:
+            - /url: /KeerthiYasasvi
+            - img "KeerthiYasasvi" [ref=e114]
+        - generic [ref=e115]:
+          - generic [ref=e116]: Labels
+          - generic [ref=e118]:
+            - 'link "component: airflow" [ref=e119] [cursor=pointer]':
+              - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22component%3A%20airflow%22
+              - generic [ref=e121]: "component: airflow"
+            - 'link "priority: high" [ref=e123] [cursor=pointer]':
+              - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22priority%3A%20high%22
+              - generic [ref=e125]: "priority: high"
+            - 'link "type: dag-failure" [ref=e127] [cursor=pointer]':
+              - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22type%3A%20dag-failure%22
+              - generic [ref=e129]: "type: dag-failure"
+      - generic [ref=e132]:
+        - generic [ref=e133]:
+          - generic [ref=e136]:
+            - heading "Description" [level=2] [ref=e137]
+            - generic [ref=e139]:
+              - generic [ref=e141]:
+                - link "@KeerthiYasasvi's profile" [ref=e143] [cursor=pointer]:
+                  - /url: https://github.com/KeerthiYasasvi
+                  - img "@KeerthiYasasvi" [ref=e144]
+                - generic [ref=e145]:
+                  - link "KeerthiYasasvi" [ref=e147] [cursor=pointer]:
+                    - /url: https://github.com/KeerthiYasasvi
+                  - generic [ref=e148]:
+                    - text: opened
+                    - link "on Jan 13, 20261 hour ago" [ref=e149] [cursor=pointer]:
+                      - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#issue-3810614140
+                      - generic "Jan 13, 2026, 3:10 PM CST" [ref=e150]: on Jan 13, 20261 hour ago
+                - generic [ref=e152]:
+                  - generic "You are the owner of the Reddit-ELT-Pipeline repository." [ref=e154]: Owner
+                  - button "Issue body actions" [ref=e156] [cursor=pointer]:
+                    - img [ref=e157]
+              - generic [ref=e159]:
+                - generic [ref=e161]:
+                  - heading "Problem Description" [level=2] [ref=e162]
+                  - paragraph [ref=e163]: "The transform_data task in my Airflow DAG is failing with PostgreSQL connection pool exhaustion errors. After running for about 2-3 minutes, the task crashes with \"FATAL: remaining connection slots are reserved\" error."
+                  - heading "Environment" [level=2] [ref=e164]
+                  - list [ref=e165]:
+                    - listitem [ref=e166]: "OS: Ubuntu 22.04"
+                    - listitem [ref=e167]: "Docker version: 24.0.7"
+                    - listitem [ref=e168]: "Python: 3.10.12"
+                    - listitem [ref=e169]: "Airflow: 2.8.0"
+                    - listitem [ref=e170]: "PostgreSQL: 15.2"
+                    - listitem [ref=e171]: "SQLAlchemy: 2.0.23"
+                  - heading "Steps to Reproduce" [level=2] [ref=e172]
+                  - list [ref=e173]:
+                    - listitem [ref=e174]: Trigger the reddit_pipeline DAG
+                    - listitem [ref=e175]: Wait for extract_post task to complete
+                    - listitem [ref=e176]: Transform_data task starts
+                    - listitem [ref=e177]: After 2-3 minutes, task fails with connection pool error
+                  - heading "Error Message" [level=2] [ref=e178]
+                  - generic [ref=e179]:
+                    - code [ref=e181]: "FATAL: remaining connection slots are reserved for non-replication superuser connections sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL: remaining connection slots are reserved Connection info: postgresql://airflow:***@postgres:5432/reddit_data"
+                    - button "Copy" [ref=e183] [cursor=pointer]:
+                      - img [ref=e184]
+                  - heading "Expected Behavior" [level=2] [ref=e187]
+                  - paragraph [ref=e188]: Transform task should successfully process Reddit data and complete without connection pool issues.
+                  - heading "Additional Context" [level=2] [ref=e189]
+                  - list [ref=e190]:
+                    - listitem [ref=e191]: This started happening after I increased the batch size for transformations
+                    - listitem [ref=e192]: PostgreSQL max_connections is set to 100
+                    - listitem [ref=e193]: I can see 95+ active connections when the error occurs
+                    - listitem [ref=e194]: The task was working fine with smaller batch sizes
+                - generic [ref=e195]:
+                  - generic [ref=e198]:
+                    - button "Create sub-issue" [ref=e200] [cursor=pointer]:
+                      - generic [ref=e202]: Create sub-issue
+                    - button "View more sub-issue options" [ref=e204] [cursor=pointer]:
+                      - img [ref=e205]
+                  - toolbar "Reactions" [ref=e207]:
+                    - button "React" [ref=e208] [cursor=pointer]:
+                      - img [ref=e209]
+          - generic [ref=e212]:
+            - generic [ref=e213]:
+              - heading "Activity" [level=2] [ref=e214]
+              - generic [ref=e215]:
+                - generic [ref=e223]:
+                  - generic [ref=e225]:
+                    - heading "github-actions commented on Jan 13, 2026 1 hour ago" [level=3] [ref=e226]:
+                      - text: github-actions commented
+                      - generic "Jan 13, 2026, 3:11 PM CST" [ref=e227]: on Jan 13, 2026 1 hour ago
+                    - link "@github-actions's profile" [ref=e229] [cursor=pointer]:
+                      - /url: /apps/github-actions
+                      - img "@github-actions" [ref=e230]
+                    - generic [ref=e231]:
+                      - generic [ref=e232]:
+                        - link "github-actions" [ref=e233] [cursor=pointer]:
+                          - /url: /apps/github-actions
+                        - generic [ref=e234]: bot
+                      - generic [ref=e236]:
+                        - link "on Jan 13, 20261 hour ago" [ref=e237] [cursor=pointer]:
+                          - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#issuecomment-3746595160
+                          - generic "Jan 13, 2026, 3:11 PM CST" [ref=e238]: on Jan 13, 20261 hour ago
+                        - generic [ref=e239]:
+                          - text: – with
+                          - link "GitHub Actions" [ref=e240] [cursor=pointer]:
+                            - /url: https://help.github.com/en/actions
+                    - button "Actions for github-actions's comment, 3:11 PM today" [ref=e244] [cursor=pointer]:
+                      - img [ref=e245]
+                  - generic [ref=e247]:
+                    - generic [ref=e249]:
+                      - paragraph [ref=e250]:
+                        - link "@KeerthiYasasvi" [ref=e251] [cursor=pointer]:
+                          - /url: https://github.com/KeerthiYasasvi
+                      - paragraph [ref=e252]: 👋 Hi! I need a bit more information to help route this issue effectively.
+                      - paragraph [ref=e253]:
+                        - strong [ref=e254]: 1. Could you please provide the Airflow logs for the transform_data task? This will help us understand the sequence of events leading up to the error.
+                        - text: __
+                      - paragraph [ref=e255]:
+                        - strong [ref=e256]: 2. Can you share the status of your services, particularly the PostgreSQL and Airflow services, at the time of the error? This will help us determine if there are any resource constraints.
+                        - text: __
+                      - paragraph [ref=e257]:
+                        - strong [ref=e258]: 3. Could you provide the full stack trace of the error message? This will help us pinpoint where the connection pool exhaustion is occurring.
+                        - text: __
+                      - separator [ref=e259]
+                      - paragraph [ref=e260]:
+                        - emphasis [ref=e261]: This is follow-up round 1 of 3. Please provide as much detail as possible.
+                      - heading "📝 Quick Commands" [level=3] [ref=e262]
+                      - list [ref=e263]:
+                        - listitem [ref=e264]:
+                          - strong [ref=e265]:
+                            - code [ref=e266]: /stop
+                          - text: "- Stop asking me questions on this issue (opt-out)"
+                        - listitem [ref=e267]:
+                          - strong [ref=e268]:
+                            - code [ref=e269]: /diagnose
+                          - text: "- Activate the bot for your specific sub-issue or different problem (for other users in this thread)"
+                    - toolbar "Reactions" [ref=e270]:
+                      - button "React" [ref=e271] [cursor=pointer]:
+                        - img [ref=e272]
+                - generic [ref=e281]:
+                  - generic [ref=e283]:
+                    - heading "KeerthiYasasvi commented on Jan 13, 2026 1 hour ago" [level=3] [ref=e284]:
+                      - text: KeerthiYasasvi commented
+                      - generic "Jan 13, 2026, 3:11 PM CST" [ref=e285]: on Jan 13, 2026 1 hour ago
+                    - link "@KeerthiYasasvi's profile" [ref=e287] [cursor=pointer]:
+                      - /url: /KeerthiYasasvi
+                      - img "@KeerthiYasasvi" [ref=e288]
+                    - generic [ref=e289]:
+                      - link "KeerthiYasasvi" [ref=e291] [cursor=pointer]:
+                        - /url: /KeerthiYasasvi
+                      - link "on Jan 13, 20261 hour ago" [ref=e294] [cursor=pointer]:
+                        - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#issuecomment-3746597912
+                        - generic "Jan 13, 2026, 3:11 PM CST" [ref=e295]: on Jan 13, 20261 hour ago
+                    - generic [ref=e297]:
+                      - generic [ref=e298]:
+                        - generic "You are the owner of the Reddit-ELT-Pipeline repository." [ref=e299]: Owner
+                        - generic "You are the author of this issue" [ref=e300]: Author
+                      - button "Actions for KeerthiYasasvi's comment, 3:11 PM today" [ref=e302] [cursor=pointer]:
+                        - img [ref=e303]
+                  - generic [ref=e305]:
+                    - generic [ref=e307]:
+                      - paragraph [ref=e308]:
+                        - strong [ref=e309]: "1. Full Airflow logs for transform_data task:"
+                      - generic [ref=e310]:
+                        - code [ref=e312]: "[2026-01-13 15:05:12,123] {taskinstance.py:1824} INFO - Starting attempt 1 of 2 [2026-01-13 15:05:12,456] {taskinstance.py:1845} INFO - Executing <Task(PythonOperator): transform_data> [2026-01-13 15:05:13,789] {transform.py:45} INFO - Initializing SQLAlchemy engine [2026-01-13 15:05:13,890] {pool.py:67} INFO - Created connection pool with pool_size=50 [2026-01-13 15:05:14,234] {transform.py:89} INFO - Starting batch processing of 50000 rows [2026-01-13 15:07:45,567] {transform.py:134} INFO - Processed 45000 rows [2026-01-13 15:08:12,890] {pool.py:234} WARNING - Connection pool at maximum capacity [2026-01-13 15:08:13,123] {connection.py:456} ERROR - Failed to acquire connection from pool [2026-01-13 15:08:13,234] {taskinstance.py:2076} ERROR - Task failed with exception Traceback (most recent call last): File \"/opt/airflow/dags/transform_data.py\", line 156, in process_batch with engine.connect() as conn: File \"/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py\", line 3325, in connect return self._connection_cls(self) File \"/usr/local/lib/python3.10/site-packages/sqlalchemy/engine/base.py\", line 146, in __init__ self._dbapi_connection = engine.raw_connection() sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL: remaining connection slots are reserved"
+                        - button "Copy" [ref=e314] [cursor=pointer]:
+                          - img [ref=e315]
+                      - paragraph [ref=e318]:
+                        - strong [ref=e319]: "2. Service status at time of error:"
+                      - generic [ref=e320]:
+                        - generic [ref=e321]: $ docker-compose ps NAME STATUS PORTS airflow-webserver Up 5 hours 0.0.0.0:8080->8080/tcp airflow-scheduler Up 5 hours 8793/tcp airflow-worker Up 5 hours 8793/tcp postgres Up 5 hours 0.0.0.0:5432->5432/tcp redis Up 5 hours 6379/tcp
+                        - button "Copy" [ref=e323] [cursor=pointer]:
+                          - img [ref=e324]
+                      - paragraph [ref=e327]: "All services running normally. PostgreSQL stats from pg_stat_activity:"
+                      - list [ref=e328]:
+                        - listitem [ref=e329]: "Total connections: 97"
+                        - listitem [ref=e330]: "Active connections: 89"
+                        - listitem [ref=e331]: "Idle connections: 8"
+                        - listitem [ref=e332]: "Max connections limit: 100"
+                      - paragraph [ref=e333]:
+                        - strong [ref=e334]: "3. Full stack trace:"
+                      - paragraph [ref=e335]: The complete error shows the connection pool was created with pool_size=50, and after processing 45000 rows, it hit the limit. The transform script creates multiple connections per batch without properly closing them, leading to exhaustion of both the SQLAlchemy pool and PostgreSQL's connection limit.
+                    - toolbar "Reactions" [ref=e336]:
+                      - button "React" [ref=e337] [cursor=pointer]:
+                        - img [ref=e338]
+                - generic [ref=e347]:
+                  - generic [ref=e349]:
+                    - heading "github-actions commented on Jan 13, 2026 1 hour ago" [level=3] [ref=e350]:
+                      - text: github-actions commented
+                      - generic "Jan 13, 2026, 3:12 PM CST" [ref=e351]: on Jan 13, 2026 1 hour ago
+                    - link "@github-actions's profile" [ref=e353] [cursor=pointer]:
+                      - /url: /apps/github-actions
+                      - img "@github-actions" [ref=e354]
+                    - generic [ref=e355]:
+                      - generic [ref=e356]:
+                        - link "github-actions" [ref=e357] [cursor=pointer]:
+                          - /url: /apps/github-actions
+                        - generic [ref=e358]: bot
+                      - generic [ref=e360]:
+                        - link "on Jan 13, 20261 hour ago" [ref=e361] [cursor=pointer]:
+                          - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#issuecomment-3746600725
+                          - generic "Jan 13, 2026, 3:12 PM CST" [ref=e362]: on Jan 13, 20261 hour ago
+                        - generic [ref=e363]:
+                          - text: – with
+                          - link "GitHub Actions" [ref=e364] [cursor=pointer]:
+                            - /url: https://help.github.com/en/actions
+                    - button "Actions for github-actions's comment, 3:12 PM today" [ref=e368] [cursor=pointer]:
+                      - img [ref=e369]
+                  - generic [ref=e371]:
+                    - generic [ref=e373]:
+                      - paragraph [ref=e374]:
+                        - link "@KeerthiYasasvi" [ref=e375] [cursor=pointer]:
+                          - /url: https://github.com/KeerthiYasasvi
+                      - paragraph [ref=e376]:
+                        - strong [ref=e377]: "Summary:"
+                        - text: Airflow DAG's transform_data task fails due to PostgreSQL connection pool exhaustion.
+                      - heading "🔍 Symptoms" [level=3] [ref=e378]
+                      - list [ref=e379]:
+                        - listitem [ref=e380]: "Task crashes with 'FATAL: remaining connection slots are reserved' error after 2-3 minutes."
+                        - listitem [ref=e381]: Connection pool at maximum capacity warning in logs.
+                        - listitem [ref=e382]: 95+ active connections observed when error occurs.
+                      - heading "💻 Environment" [level=3] [ref=e383]
+                      - list [ref=e384]:
+                        - listitem [ref=e385]:
+                          - strong [ref=e386]: "OS:"
+                          - text: Ubuntu 22.04
+                        - listitem [ref=e387]:
+                          - strong [ref=e388]: "Docker:"
+                          - text: 24.0.7
+                        - listitem [ref=e389]:
+                          - strong [ref=e390]: "Python:"
+                          - text: 3.10.12
+                        - listitem [ref=e391]:
+                          - strong [ref=e392]: "Airflow:"
+                          - text: 2.8.0
+                        - listitem [ref=e393]:
+                          - strong [ref=e394]: "PostgreSQL:"
+                          - text: "15.2"
+                        - listitem [ref=e395]:
+                          - strong [ref=e396]: "SQLAlchemy:"
+                          - text: 2.0.23
+                      - heading "📊 Key Evidence" [level=3] [ref=e397]
+                      - generic [ref=e398]:
+                        - code [ref=e400]: "PostgreSQL max_connections is set to 100. Connection pool created with pool_size=50. Error: 'FATAL: remaining connection slots are reserved for non-replication superuser connections'."
+                        - button "Copy" [ref=e402] [cursor=pointer]:
+                          - img [ref=e403]
+                      - heading "✅ Suggested Next Steps" [level=3] [ref=e406]
+                      - list [ref=e407]:
+                        - listitem [ref=e408]: Check your transform_data.py script to ensure connections are properly closed after use. Look for 'with engine.connect() as conn:' and ensure connections are closed.
+                        - listitem [ref=e409]: Verify the connection pool size in your SQLAlchemy setup. Check the pool_size parameter in your database connection configuration, typically found in the DAG or a configuration file like config.py.
+                        - listitem [ref=e410]: Consider reducing the batch size for transformations to decrease the number of concurrent connections. This can be adjusted in the transform_data task configuration.
+                        - listitem [ref=e411]: Review the PostgreSQL max_connections setting in your PostgreSQL configuration file (usually located at /etc/postgresql/15/main/postgresql.conf) and consider increasing it if necessary.
+                      - separator [ref=e412]
+                      - group [ref=e413]:
+                        - generic "📦 Case Packet (JSON)" [ref=e414] [cursor=pointer]
+                      - paragraph [ref=e415]:
+                        - strong [ref=e416]: "Completeness Score:"
+                        - text: "100/100 (threshold: 75)"
+                    - toolbar "Reactions" [ref=e417]:
+                      - button "React" [ref=e418] [cursor=pointer]:
+                        - img [ref=e419]
+                - region "Events" [ref=e421]:
+                  - generic [ref=e428]:
+                    - img [ref=e431]
+                    - generic [ref=e435]:
+                      - link "github-actions" [ref=e437] [cursor=pointer]:
+                        - /url: /apps/github-actions
+                        - generic [ref=e438]: github-actions
+                      - text: added
+                      - 'link "component: airflow" [ref=e440] [cursor=pointer]':
+                        - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22component%3A%20airflow%22
+                        - generic [ref=e442]: "component: airflow"
+                      - 'link "priority: high" [ref=e445] [cursor=pointer]':
+                        - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22priority%3A%20high%22
+                        - generic [ref=e447]: "priority: high"
+                      - 'link "type: dag-failure" [ref=e450] [cursor=pointer]':
+                        - /url: /KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22type%3A%20dag-failure%22
+                        - generic [ref=e452]: "type: dag-failure"
+                      - link "on Jan 13, 20261 hour ago" [ref=e454] [cursor=pointer]:
+                        - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#event-22027847314
+                        - generic "Jan 13, 2026, 3:12 PM CST" [ref=e455]: on Jan 13, 20261 hour ago
+                  - generic [ref=e459]:
+                    - img [ref=e462]
+                    - generic [ref=e466]:
+                      - link "github-actions" [ref=e468] [cursor=pointer]:
+                        - /url: /apps/github-actions
+                        - generic [ref=e469]: github-actions
+                      - text: assigned
+                      - link "KeerthiYasasvi" [ref=e471] [cursor=pointer]:
+                        - /url: /KeerthiYasasvi
+                      - link "on Jan 13, 20261 hour ago" [ref=e472] [cursor=pointer]:
+                        - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#event-22027847569
+                        - generic "Jan 13, 2026, 3:12 PM CST" [ref=e473]: on Jan 13, 20261 hour ago
+                - generic [ref=e481]:
+                  - generic [ref=e483]:
+                    - heading "KeerthiYasasvi commented on Jan 13, 2026 1 hour ago" [level=3] [ref=e484]:
+                      - text: KeerthiYasasvi commented
+                      - generic "Jan 13, 2026, 3:17 PM CST" [ref=e485]: on Jan 13, 2026 1 hour ago
+                    - link "@KeerthiYasasvi's profile" [ref=e487] [cursor=pointer]:
+                      - /url: /KeerthiYasasvi
+                      - img "@KeerthiYasasvi" [ref=e488]
+                    - generic [ref=e489]:
+                      - link "KeerthiYasasvi" [ref=e491] [cursor=pointer]:
+                        - /url: /KeerthiYasasvi
+                      - link "on Jan 13, 20261 hour ago" [ref=e494] [cursor=pointer]:
+                        - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#issuecomment-3746616137
+                        - generic "Jan 13, 2026, 3:17 PM CST" [ref=e495]: on Jan 13, 20261 hour ago
+                    - generic [ref=e497]:
+                      - generic [ref=e498]:
+                        - generic "You are the owner of the Reddit-ELT-Pipeline repository." [ref=e499]: Owner
+                        - generic "You are the author of this issue" [ref=e500]: Author
+                      - button "Actions for KeerthiYasasvi's comment, 3:17 PM today" [ref=e502] [cursor=pointer]:
+                        - img [ref=e503]
+                  - generic [ref=e505]:
+                    - generic [ref=e507]:
+                      - paragraph [ref=e508]: /diagnose I'm having a related but different issue with PostgreSQL connections. My load_to_warehouse task is failing with connection timeouts.
+                      - paragraph [ref=e509]: "The error is different though:"
+                      - generic [ref=e510]:
+                        - code [ref=e512]: "psycopg2.OperationalError: could not connect to server: Connection timed out Is the server running on host \"postgres\" (172.18.0.5) and accepting TCP/IP connections on port 5432?"
+                        - button "Copy" [ref=e514] [cursor=pointer]:
+                          - img [ref=e515]
+                      - paragraph [ref=e518]: "Environment:"
+                      - list [ref=e519]:
+                        - listitem [ref=e520]: "OS: Ubuntu 20.04 (different from original issue)"
+                        - listitem [ref=e521]: "Docker version: 23.0.5"
+                        - listitem [ref=e522]: "Python: 3.9.16"
+                        - listitem [ref=e523]: "Airflow: 2.7.3"
+                        - listitem [ref=e524]: "PostgreSQL: 14.8"
+                        - listitem [ref=e525]: "psycopg2: 2.9.6"
+                      - paragraph [ref=e526]: The task creates a new connection for each data chunk upload. After about 10 chunks (~5 minutes), it starts timing out. Could this be related to the connection pool exhaustion issue, or is this a network/timeout configuration problem?
+                    - toolbar "Reactions" [ref=e527]:
+                      - button "React" [ref=e528] [cursor=pointer]:
+                        - img [ref=e529]
+                - generic [ref=e538]:
+                  - generic [ref=e540]:
+                    - heading "github-actions commented on Jan 13, 2026 1 hour ago" [level=3] [ref=e541]:
+                      - text: github-actions commented
+                      - generic "Jan 13, 2026, 3:18 PM CST" [ref=e542]: on Jan 13, 2026 1 hour ago
+                    - link "@github-actions's profile" [ref=e544] [cursor=pointer]:
+                      - /url: /apps/github-actions
+                      - img "@github-actions" [ref=e545]
+                    - generic [ref=e546]:
+                      - generic [ref=e547]:
+                        - link "github-actions" [ref=e548] [cursor=pointer]:
+                          - /url: /apps/github-actions
+                        - generic [ref=e549]: bot
+                      - generic [ref=e551]:
+                        - link "on Jan 13, 20261 hour ago" [ref=e552] [cursor=pointer]:
+                          - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues/15#issuecomment-3746618765
+                          - generic "Jan 13, 2026, 3:18 PM CST" [ref=e553]: on Jan 13, 20261 hour ago
+                        - generic [ref=e554]:
+                          - text: – with
+                          - link "GitHub Actions" [ref=e555] [cursor=pointer]:
+                            - /url: https://help.github.com/en/actions
+                    - button "Actions for github-actions's comment, 3:18 PM today" [ref=e559] [cursor=pointer]:
+                      - img [ref=e560]
+                  - generic [ref=e562]:
+                    - generic [ref=e564]:
+                      - paragraph [ref=e565]:
+                        - link "@KeerthiYasasvi" [ref=e566] [cursor=pointer]:
+                          - /url: https://github.com/KeerthiYasasvi
+                      - paragraph [ref=e567]:
+                        - strong [ref=e568]: "Summary:"
+                        - text: Airflow DAG's transform_data task fails due to PostgreSQL connection pool exhaustion.
+                      - heading "🔍 Symptoms" [level=3] [ref=e569]
+                      - list [ref=e570]:
+                        - listitem [ref=e571]: "Task crashes with 'FATAL: remaining connection slots are reserved' error after 2-3 minutes."
+                        - listitem [ref=e572]: Connection pool at maximum capacity warning in logs.
+                      - heading "💻 Environment" [level=3] [ref=e573]
+                      - list [ref=e574]:
+                        - listitem [ref=e575]:
+                          - strong [ref=e576]: "OS:"
+                          - text: Ubuntu 22.04
+                        - listitem [ref=e577]:
+                          - strong [ref=e578]: "Docker version:"
+                          - text: 24.0.7
+                        - listitem [ref=e579]:
+                          - strong [ref=e580]: "Python:"
+                          - text: 3.10.12
+                        - listitem [ref=e581]:
+                          - strong [ref=e582]: "Airflow:"
+                          - text: 2.8.0
+                        - listitem [ref=e583]:
+                          - strong [ref=e584]: "PostgreSQL:"
+                          - text: "15.2"
+                        - listitem [ref=e585]:
+                          - strong [ref=e586]: "SQLAlchemy:"
+                          - text: 2.0.23
+                      - heading "📊 Key Evidence" [level=3] [ref=e587]
+                      - generic [ref=e588]:
+                        - code [ref=e590]: "PostgreSQL max_connections is set to 100, with 95+ active connections during error. Connection pool created with pool_size=50, reaching maximum capacity. Error: 'sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL: remaining connection slots are reserved'"
+                        - button "Copy" [ref=e592] [cursor=pointer]:
+                          - img [ref=e593]
+                      - heading "✅ Suggested Next Steps" [level=3] [ref=e596]
+                      - list [ref=e597]:
+                        - listitem [ref=e598]: Review the batch size configuration in your DAG file, typically located in the Airflow DAGs directory, and consider reducing it to prevent connection exhaustion.
+                        - listitem [ref=e599]: Check your SQLAlchemy engine configuration in the transform_data task script, usually found in the DAG's Python file, to ensure connections are properly closed after use.
+                        - listitem [ref=e600]: Verify the PostgreSQL max_connections setting in your PostgreSQL configuration file (commonly postgresql.conf or via ALTER SYSTEM command) to ensure it aligns with your workload requirements.
+                        - listitem [ref=e601]: Inspect the .env file or docker-compose.yml for any environment variables related to database connections and adjust as necessary.
+                      - separator [ref=e602]
+                      - group [ref=e603]:
+                        - generic "📦 Case Packet (JSON)" [ref=e604] [cursor=pointer]
+                      - paragraph [ref=e605]:
+                        - strong [ref=e606]: "Completeness Score:"
+                        - text: "100/100 (threshold: 75)"
+                    - toolbar "Reactions" [ref=e607]:
+                      - button "React" [ref=e608] [cursor=pointer]:
+                        - img [ref=e609]
+            - generic [ref=e612]:
+              - link "@KeerthiYasasvi's profile" [ref=e613] [cursor=pointer]:
+                - /url: /KeerthiYasasvi
+                - img "KeerthiYasasvi" [ref=e614]
+              - heading "Add a comment" [level=2] [ref=e615]
+              - group "new Comment" [ref=e620]:
+                - generic [ref=e621] [cursor=pointer]: new Comment
+                - generic [ref=e622]:
+                  - generic [ref=e623]: "Markdown input: edit mode selected."
+                  - generic [ref=e624]:
+                    - generic [ref=e625]:
+                      - navigation "View mode" [ref=e629]:
+                        - tablist [ref=e630]:
+                          - tab "Write" [selected] [ref=e631] [cursor=pointer]
+                          - tab "Preview" [ref=e632] [cursor=pointer]
+                      - toolbar "Formatting tools" [ref=e633]:
+                        - generic [ref=e634]:
+                          - button "Heading" [ref=e635] [cursor=pointer]:
+                            - img [ref=e636]
+                          - button "Bold" [ref=e638] [cursor=pointer]:
+                            - img [ref=e639]
+                          - button "Italic" [ref=e641] [cursor=pointer]:
+                            - img [ref=e642]
+                        - generic [ref=e645]:
+                          - button "Quote" [ref=e646] [cursor=pointer]:
+                            - img [ref=e647]
+                          - button "Code" [ref=e649] [cursor=pointer]:
+                            - img [ref=e650]
+                          - button "Link" [ref=e652] [cursor=pointer]:
+                            - img [ref=e653]
+                        - generic [ref=e656]:
+                          - button "Unordered list" [ref=e657] [cursor=pointer]:
+                            - img [ref=e658]
+                          - button "Numbered list" [ref=e660] [cursor=pointer]:
+                            - img [ref=e661]
+                          - button "Task list" [ref=e663] [cursor=pointer]:
+                            - img [ref=e664]
+                        - generic [ref=e667]:
+                          - button "Mention" [ref=e668] [cursor=pointer]:
+                            - img [ref=e669]
+                          - button "Reference" [ref=e671] [cursor=pointer]:
+                            - img [ref=e672]
+                        - button "Saved replies" [ref=e674] [cursor=pointer]:
+                          - img [ref=e675]
+                        - button "Slash commands" [ref=e677] [cursor=pointer]:
+                          - img [ref=e678]
+                    - textbox "Add a comment" [ref=e683]:
+                      - /placeholder: Use Markdown to format your comment
+                    - alert
+                  - generic [ref=e684]:
+                    - button "Paste, drop, or click to add files" [ref=e687] [cursor=pointer]:
+                      - generic [ref=e688]:
+                        - generic:
+                          - img
+                        - generic [ref=e690]: Paste, drop, or click to add files
+                    - generic [ref=e691]:
+                      - generic [ref=e692]:
+                        - button "Close issue" [ref=e694] [cursor=pointer]:
+                          - generic [ref=e695]:
+                            - generic:
+                              - img
+                            - generic [ref=e696]: Close issue
+                        - button "More options" [ref=e698] [cursor=pointer]:
+                          - img [ref=e699]
+                      - tooltip "Comment can not be empty" [ref=e701]:
+                        - button "Comment" [disabled] [ref=e702]:
+                          - generic [ref=e704]: Comment
+        - generic [ref=e706]:
+          - heading "Metadata" [level=2] [ref=e707]
+          - generic [ref=e709]:
+            - generic [ref=e710]:
+              - generic [ref=e712]:
+                - heading "Assignees" [level=3]
+                - button "Edit Assignees" [ref=e713] [cursor=pointer]:
+                  - generic [ref=e714]: Edit Assignees
+                  - generic:
+                    - img
+              - list [ref=e716]:
+                - listitem [ref=e717]:
+                  - link "KeerthiYasasvi" [ref=e718] [cursor=pointer]:
+                    - /url: /KeerthiYasasvi
+                    - generic:
+                      - img "@KeerthiYasasvi"
+                    - generic [ref=e721]: KeerthiYasasvi
+            - generic [ref=e722]:
+              - generic [ref=e724]:
+                - heading "Labels" [level=3]
+                - button "Edit Labels" [ref=e725] [cursor=pointer]:
+                  - generic [ref=e726]: Edit Labels
+                  - generic:
+                    - img
+              - generic [ref=e728]:
+                - 'link "component: airflow" [ref=e729] [cursor=pointer]':
+                  - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22component%3A%20airflow%22
+                  - generic [ref=e731]: "component: airflow"
+                - 'link "priority: high" [ref=e733] [cursor=pointer]':
+                  - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22priority%3A%20high%22
+                  - generic [ref=e735]: "priority: high"
+                - 'link "type: dag-failure" [ref=e737] [cursor=pointer]':
+                  - /url: https://github.com/KeerthiYasasvi/Reddit-ELT-Pipeline/issues?q=state%3Aopen%20label%3A%22type%3A%20dag-failure%22
+                  - generic [ref=e739]: "type: dag-failure"
+            - generic [ref=e742]:
+              - generic [ref=e743]:
+                - heading "Projects" [level=3]
+                - button "Edit Projects" [ref=e744] [cursor=pointer]:
+                  - generic [ref=e745]: Edit Projects
+                  - generic:
+                    - img
+              - generic [ref=e746]: No projects
+            - generic [ref=e748]:
+              - generic [ref=e749]:
+                - heading "Milestone" [level=3]
+                - button "Edit Milestone" [ref=e750] [cursor=pointer]:
+                  - generic [ref=e751]: Edit Milestone
+                  - generic:
+                    - img
+              - generic [ref=e752]: No milestone
+            - generic [ref=e754]:
+              - generic [ref=e755]:
+                - heading "Relationships" [level=3]
+                - button "Edit Relationships" [ref=e756] [cursor=pointer]:
+                  - generic [ref=e757]: Edit Relationships
+                  - generic:
+                    - img
+              - generic [ref=e758]: None yet
+            - generic [ref=e759]:
+              - generic [ref=e761]:
+                - heading "Development" [level=3]
+                - button "Edit Development" [ref=e762] [cursor=pointer]:
+                  - generic [ref=e763]: Edit Development
+                  - generic:
+                    - img
+              - generic [ref=e764]:
+                - generic [ref=e766]:
+                  - button "Code with agent mode" [ref=e768] [cursor=pointer]:
+                    - generic [ref=e769]:
+                      - generic:
+                        - img
+                      - generic [ref=e770]: Code with agent mode
+                  - button "Select code repository" [ref=e773] [cursor=pointer]:
+                    - img [ref=e774]
+                - generic [ref=e776]:
+                  - button "Create a branch" [ref=e777] [cursor=pointer]:
+                    - generic [ref=e779]: Create a branch
+                  - text: for this issue or link a pull request.
+                - list
+            - generic [ref=e780]:
+              - generic [ref=e782]:
+                - heading "Notifications" [level=3]
+                - button "Customize" [ref=e783] [cursor=pointer]
+              - generic [ref=e785]:
+                - button "Unsubscribe" [ref=e786] [cursor=pointer]:
+                  - generic [ref=e787]:
+                    - generic:
+                      - img
+                    - generic [ref=e788]: Unsubscribe
+                - paragraph [ref=e789]: You're receiving notifications because you're subscribed to this thread.
+            - generic [ref=e790]:
+              - generic [ref=e792]:
+                - heading "Participants" [level=3]
+              - link "@KeerthiYasasvi" [ref=e796] [cursor=pointer]:
+                - /url: /KeerthiYasasvi
+                - img "@KeerthiYasasvi" [ref=e797]
+            - heading "Issue actions" [level=2] [ref=e798]
+            - list [ref=e799]:
+              - listitem [ref=e800]:
+                - button "Transfer issue" [ref=e801] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e803]: Transfer issue
+              - listitem [ref=e804]:
+                - button "Duplicate issue" [ref=e805] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e807]: Duplicate issue
+              - listitem [ref=e808]:
+                - button "Lock conversation" [ref=e809] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e811]: Lock conversation
+              - listitem [ref=e812]:
+                - button "Up to 3 issues can be pinned to the top of the issues page" [ref=e813] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - tooltip "Up to 3 issues can be pinned to the top of the issues page" [ref=e816]: Pin issue
+              - listitem [ref=e817]:
+                - button "Delete issue" [ref=e818] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e820]: Delete issue
+              - listitem [ref=e821]:
+                - button "Give feedback" [ref=e822] [cursor=pointer]:
+                  - generic:
+                    - img
+                  - generic [ref=e824]: Give feedback
+  - contentinfo [ref=e825]:
+    - heading "Footer" [level=2] [ref=e826]
+    - generic [ref=e827]:
+      - generic [ref=e828]:
+        - link "GitHub Homepage" [ref=e829] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e830]
+        - generic [ref=e832]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e833]:
+        - heading "Footer navigation" [level=3] [ref=e834]
+        - list "Footer navigation" [ref=e835]:
+          - listitem [ref=e836]:
+            - link "Terms" [ref=e837] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e838]:
+            - link "Privacy" [ref=e839] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e840]:
+            - link "Security" [ref=e841] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e842]:
+            - link "Status" [ref=e843] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e844]:
+            - link "Community" [ref=e845] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e846]:
+            - link "Docs" [ref=e847] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e848]:
+            - link "Contact" [ref=e849] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e850]:
+            - button "Manage cookies" [ref=e852] [cursor=pointer]
+          - listitem [ref=e853]:
+            - button "Do not share my personal information" [ref=e855] [cursor=pointer]
+```
