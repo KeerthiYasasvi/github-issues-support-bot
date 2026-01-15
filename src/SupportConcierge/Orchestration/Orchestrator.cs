@@ -290,14 +290,19 @@ public class Orchestrator
         }
 
         // Prefer off_topic for how-to/support-only questions when no problem indicators are present
-        var problemTerms = new[]
+        var problemPatterns = new[]
         {
-            "error", "exception", "fail", "failed", "failure", "crash", "stack trace",
-            "not working", "doesn't work", "doesnt work", "unable to", "cannot", "can't", "bug", "regression"
+            "error message", "exception", "fail", "failed", "failure", "crash", "crashed", "stack trace",
+            "not working", "doesn't work", "doesnt work", "unable to", "cannot", "can't", "can not", 
+            "won't", "wont", "bug", "regression", "broken", "issue with", "problem with"
         };
-        var hasProblemTerms = problemTerms.Any(term => text.Contains(term));
-
-        if (categoryScores.TryGetValue("off_topic", out var offTopicScore) && offTopicScore > 0 && !hasProblemTerms)
+        var negationPatterns = new[] { "no error", "no errors", "no exception", "no crash", "no fail" };
+        
+        var hasProblemTerms = problemPatterns.Any(term => text.Contains(term));
+        var hasNegation = negationPatterns.Any(term => text.Contains(term));
+        
+        // If we have off-topic keywords, no actual problems (or negated problems), route to off-topic
+        if (categoryScores.TryGetValue("off_topic", out var offTopicScore) && offTopicScore > 0 && (!hasProblemTerms || hasNegation))
         {
             return "off_topic";
         }
