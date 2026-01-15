@@ -71,22 +71,22 @@ categories:
       - assignment
       - general question
       - chatgpt
-      - how to
-      - how do i
-      - how can i
-      - how to build
-      - how do i build
-      - how to run
-      - how do i run
-      - run locally
-      - build locally
-      - clone repo
-      - clone repository
-      - install instructions
-      - installation steps
-      - setup guide
-      - getting started guide
-      - build instructions
+      - 'how to'
+      - 'how do i'
+      - 'how can i'
+      - 'how to build'
+      - 'how do i build'
+      - 'how to run'
+      - 'how do i run'
+      - 'run locally'
+      - 'build locally'
+      - clone
+      - cloning
+      - 'install instructions'
+      - 'installation steps'
+      - 'setup guide'
+      - 'getting started'
+      - 'build instructions'
 
   # Reddit-ELT-Pipeline specific categories
   - name: airflow_dag

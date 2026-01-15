@@ -282,11 +282,28 @@ public class Orchestrator
         var text = $"{issue.Title} {issueBody}".ToLowerInvariant();
         var categoryScores = new Dictionary<string, int>();
 
+        // DEBUG: Log off_topic keywords
+        var offTopicCategory = specPack.Categories.FirstOrDefault(c => c.Name == "off_topic");
+        if (offTopicCategory != null)
+        {
+            Console.WriteLine($"[DEBUG] off_topic has {offTopicCategory.Keywords.Count} keywords");
+            Console.WriteLine($"[DEBUG] First 5 off_topic keywords: {string.Join(", ", offTopicCategory.Keywords.Take(5))}");
+        }
+        
+        Console.WriteLine($"[DEBUG] Text being analyzed: {text.Substring(0, Math.Min(100, text.Length))}...");
+
         foreach (var category in specPack.Categories)
         {
             var score = category.Keywords.Count(keyword => 
                 text.Contains(keyword.ToLowerInvariant()));
             categoryScores[category.Name] = score;
+            
+            // DEBUG: Log which keywords matched for off_topic
+            if (category.Name == "off_topic" && score > 0)
+            {
+                var matchedKeywords = category.Keywords.Where(k => text.Contains(k.ToLowerInvariant())).ToList();
+                Console.WriteLine($"[DEBUG] off_topic matched keywords: {string.Join(", ", matchedKeywords)}");
+            }
         }
 
         // DEBUG: Log category scores
