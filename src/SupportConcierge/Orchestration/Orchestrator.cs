@@ -493,7 +493,8 @@ public class Orchestrator
             "not working", "not relevant", "not applicable",
             "different error", "different issue", "different problem",
             "need clarification", "not sure how", "unclear how",
-            "not my case", "not my situation", "doesn't match"
+            "not my case", "not my situation", "doesn't match",
+            "disagree", "disagrees", "disagreed", "disagreement"
         };
 
         var lowerComment = userComment.ToLowerInvariant();
