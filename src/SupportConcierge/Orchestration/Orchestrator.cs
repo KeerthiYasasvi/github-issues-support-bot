@@ -289,6 +289,14 @@ public class Orchestrator
             categoryScores[category.Name] = score;
         }
 
+        // DEBUG: Log category scores
+        Console.WriteLine($"[DEBUG] Issue #{issue.Number} category scores:");
+        foreach (var kvp in categoryScores.OrderByDescending(k => k.Value))
+        {
+            if (kvp.Value > 0)
+                Console.WriteLine($"  {kvp.Key}: {kvp.Value}");
+        }
+
         // Prefer off_topic for how-to/support-only questions when no problem indicators are present
         var problemPatterns = new[]
         {
@@ -301,11 +309,18 @@ public class Orchestrator
         var hasProblemTerms = problemPatterns.Any(term => text.Contains(term));
         var hasNegation = negationPatterns.Any(term => text.Contains(term));
         
+        // DEBUG: Log heuristic evaluation
+        Console.WriteLine($"[DEBUG] Off-topic heuristic: offTopicScore={categoryScores.GetValueOrDefault("off_topic", 0)}, hasProblemTerms={hasProblemTerms}, hasNegation={hasNegation}");
+        Console.WriteLine($"[DEBUG] Heuristic condition: score>0={categoryScores.GetValueOrDefault("off_topic", 0) > 0}, (!problems||negation)={!hasProblemTerms || hasNegation}");
+        
         // If we have off-topic keywords, no actual problems (or negated problems), route to off-topic
         if (categoryScores.TryGetValue("off_topic", out var offTopicScore) && offTopicScore > 0 && (!hasProblemTerms || hasNegation))
         {
+            Console.WriteLine($"[DEBUG] Returning off_topic via heuristic");
             return "off_topic";
         }
+        
+        Console.WriteLine($"[DEBUG] Off-topic heuristic did not trigger");
 
         var bestMatch = categoryScores.OrderByDescending(kvp => kvp.Value).FirstOrDefault();
         if (bestMatch.Value > 0)
