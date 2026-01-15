@@ -162,6 +162,14 @@ public class CommentComposer
             sb.AppendLine();
         }
 
+        // Quick commands and disagreement guidance
+        sb.AppendLine("### 📝 Quick Commands");
+        sb.AppendLine("- **`/stop`** - Stop asking me questions on this issue (opt-out)");
+        sb.AppendLine("- **`/diagnose`** - Activate the bot for your specific sub-issue or different problem (for other users in this thread)");
+        sb.AppendLine();
+        sb.AppendLine("If this brief doesn't fit, reply with 'I disagree' or similar and I'll re-iterate once before escalating.");
+        sb.AppendLine();
+
         // Metadata
         sb.AppendLine("---");
         sb.AppendLine("<details>");

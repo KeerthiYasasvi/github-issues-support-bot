@@ -33,23 +33,35 @@ public class Orchestrator
             return;
         }
 
-        // SCENARIO 1 FIX: For issue_comment events, only process if comment is from issue author
+        GitHubComment? incomingComment = null;
+        bool isDiagnoseCommand = false;
+        bool isStopCommand = false;
+
+        // SCENARIO 1 FIX (updated): Allow /diagnose from non-authors; honor /stop from author
         if (eventName == "issue_comment")
         {
-            var comment = eventPayload.GetProperty("comment").Deserialize<GitHubComment>();
-            if (comment == null)
+            incomingComment = eventPayload.GetProperty("comment").Deserialize<GitHubComment>();
+            if (incomingComment == null)
             {
                 Console.WriteLine("ERROR: Could not parse comment from issue_comment event");
                 return;
             }
 
+            var body = incomingComment.Body ?? string.Empty;
+            isDiagnoseCommand = body.Contains("/diagnose", StringComparison.OrdinalIgnoreCase);
+            isStopCommand = body.Contains("/stop", StringComparison.OrdinalIgnoreCase);
+
             var commentAuthor = issue.User.Login;
-            if (!comment.User.Login.Equals(commentAuthor, StringComparison.OrdinalIgnoreCase))
+            if (!incomingComment.User.Login.Equals(commentAuthor, StringComparison.OrdinalIgnoreCase) && !isDiagnoseCommand)
             {
-                Console.WriteLine($"Skipping: Comment from {comment.User.Login} (not from issue author {commentAuthor})");
+                Console.WriteLine($"Skipping: Comment from {incomingComment.User.Login} (not from issue author {commentAuthor}) and not a /diagnose command");
                 return;
             }
         }
+
+        var activeParticipant = (eventName == "issue_comment" && isDiagnoseCommand && incomingComment != null)
+            ? incomingComment.User.Login
+            : issue.User.Login;
 
         Console.WriteLine($"Issue #{issue.Number}: {issue.Title}");
         Console.WriteLine($"Repository: {repository.FullName}");
@@ -73,33 +85,62 @@ public class Orchestrator
         var comments = await githubApi.GetIssueCommentsAsync(
             repository.Owner.Login, repository.Name, issue.Number);
 
-        // Find latest bot state from previous comments
+        // Find latest bot state for this participant from previous comments
         BotState? currentState = null;
         foreach (var comment in comments.OrderByDescending(c => c.CreatedAt))
         {
-            if (comment.User.Login.Equals(botUsername, StringComparison.OrdinalIgnoreCase))
+            if (!comment.User.Login.Equals(botUsername, StringComparison.OrdinalIgnoreCase))
             {
-                currentState = stateStore.ExtractState(comment.Body);
-                if (currentState != null)
-                {
-                    Console.WriteLine($"Found existing state: Loop {currentState.LoopCount}, Category: {currentState.Category}");
-                    break;
-                }
+                continue;
             }
+
+            var candidateState = stateStore.ExtractState(comment.Body);
+            if (candidateState == null)
+            {
+                continue;
+            }
+
+            if (!string.IsNullOrEmpty(candidateState.IssueAuthor) &&
+                candidateState.IssueAuthor.Equals(activeParticipant, StringComparison.OrdinalIgnoreCase))
+            {
+                currentState = candidateState;
+                Console.WriteLine($"Found existing state for {activeParticipant}: Loop {currentState.LoopCount}, Category: {currentState.Category}");
+                break;
+            }
+        }
+
+        // Handle /stop: only issue author can opt out
+        if (eventName == "issue_comment" && isStopCommand && incomingComment != null &&
+            incomingComment.User.Login.Equals(issue.User.Login, StringComparison.OrdinalIgnoreCase))
+        {
+            if (currentState == null)
+            {
+                currentState = stateStore.CreateInitialState("unknown", activeParticipant);
+            }
+
+            currentState.IsFinalized = true;
+            currentState.FinalizedAt = DateTime.UtcNow;
+            currentState.LastUpdated = DateTime.UtcNow;
+
+            var stopMessage = $"@{issue.User.Login}\n\nYou've opted out with /stop. I won't ask further questions on this issue. " +
+                              "If you need to restart, comment with /diagnose.";
+            var commentWithState = stateStore.EmbedState(stopMessage, currentState);
+            await githubApi.PostCommentAsync(repository.Owner.Login, repository.Name, issue.Number, commentWithState);
+            Console.WriteLine("Processed /stop command and finalized state for issue author.");
+            return;
         }
 
         // Initialize validators and scorers early (needed for Scenario 7)
         var validators = new Validators(specPack.Validators);
         var secretRedactor = new SecretRedactor(specPack.Validators.SecretPatterns);
 
-        // SCENARIO 1 FIX: Check if issue is already finalized
+        // SCENARIO 1 FIX: Check if issue is already finalized for this participant
         if (currentState != null && currentState.IsFinalized)
         {
             // SCENARIO 7: Check for disagreement in new comment
-            if (eventName == "issue_comment" && currentState.BriefIterationCount < 2)
+            if (eventName == "issue_comment" && currentState.BriefIterationCount < 2 && incomingComment != null)
             {
-                var incomingComment = eventPayload.GetProperty("comment").Deserialize<GitHubComment>();
-                if (incomingComment != null && DetectDisagreement(incomingComment.Body))
+                if (DetectDisagreement(incomingComment.Body))
                 {
                     Console.WriteLine($"Disagreement detected from {incomingComment.User.Login}. Regenerating brief...");
                     await HandleBriefDisagreementAsync(
@@ -117,7 +158,7 @@ public class Orchestrator
 
         // SCENARIO 1 FIX: Only process comments from the issue author
         // Filter comments to only include issue author's responses (for field extraction)
-        var issueAuthor = issue.User.Login;
+        var issueAuthor = activeParticipant;
         var authorComments = comments
             .Where(c => c.User.Login.Equals(issueAuthor, StringComparison.OrdinalIgnoreCase))
             .ToList();
