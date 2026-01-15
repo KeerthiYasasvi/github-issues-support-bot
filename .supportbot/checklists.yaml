@@ -219,11 +219,11 @@ checklists:
   - category: reddit_api
     completeness_threshold: 70
     required_fields:
-      - name: reddit_credentials
-        description: Confirmation that Reddit API credentials are set
+      - name: reddit_credentials_configured
+        description: Confirmation that Reddit API credentials are properly configured (do NOT ask for actual credentials)
         weight: 20
         optional: false
-        aliases: [api_keys, praw_config, client_id]
+        aliases: [credentials_set, praw_configured, has_client_id]
       
       - name: subreddit_name
         description: Which subreddit is being extracted

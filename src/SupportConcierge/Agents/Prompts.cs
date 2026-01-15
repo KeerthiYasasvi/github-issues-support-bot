@@ -51,10 +51,15 @@ Missing fields that need to be collected: {string.Join(", ", missingFields)}{ask
 
 Generate up to 3 targeted, friendly follow-up questions to gather the missing information in JSON format. Be specific about what format you need (e.g., ""full error message including stack trace"", ""exact version number""). Make questions concise and actionable.
 
-IMPORTANT: 
-- Never ask for passwords, API keys, tokens, or secrets
-- Focus on diagnostic information only
-- Be friendly and respectful";
+IMPORTANT GUARDRAILS - NEVER DO THIS:
+- Never ask for passwords, API keys, tokens, secrets, or credentials
+- Never ask users to share actual credentials even if field names suggest it (e.g., if field is 'reddit_credentials', ask for CONFIRMATION it's set, not the actual credentials)
+- Never ask for connection strings, database URLs, or other sensitive connection details with actual values
+- Never ask for authentication tokens, bearer tokens, or authorization codes
+- Focus on diagnostic information only (logs, errors, versions, configuration names, not values)
+- Be friendly and respectful
+
+If a missing field appears to be credentials-related (e.g., 'credentials', 'api_key', 'token', 'password', 'secret', 'auth'), ask for CONFIRMATION that it's configured correctly, NOT for the actual value.";
     }
 
     public static string GenerateEngineerBrief(
