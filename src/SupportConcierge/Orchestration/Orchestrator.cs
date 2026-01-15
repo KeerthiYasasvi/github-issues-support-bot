@@ -322,7 +322,7 @@ public class Orchestrator
         state = stateStore.PruneState(state);
 
         // Compose and post comment
-        var commentBody = commentComposer.ComposeFollowUpComment(questions, state.LoopCount);
+        var commentBody = commentComposer.ComposeFollowUpComment(questions, state.LoopCount, issue.User.Login);
         var commentWithState = stateStore.EmbedState(commentBody, state);
 
         await githubApi.PostCommentAsync(
@@ -403,7 +403,7 @@ public class Orchestrator
 
         // Compose and post engineer brief
         var briefComment = commentComposer.ComposeEngineerBrief(
-            brief, scoring, extractedFields, secretFindings);
+            brief, scoring, extractedFields, secretFindings, issue.User.Login);
 
         // SCENARIO 1 FIX: Mark state as finalized to prevent reprocessing
         state.IsActionable = true;
