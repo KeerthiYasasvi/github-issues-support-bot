@@ -289,6 +289,19 @@ public class Orchestrator
             categoryScores[category.Name] = score;
         }
 
+        // Prefer off_topic for how-to/support-only questions when no problem indicators are present
+        var problemTerms = new[]
+        {
+            "error", "exception", "fail", "failed", "failure", "crash", "stack trace",
+            "not working", "doesn't work", "doesnt work", "unable to", "cannot", "can't", "bug", "regression"
+        };
+        var hasProblemTerms = problemTerms.Any(term => text.Contains(term));
+
+        if (categoryScores.TryGetValue("off_topic", out var offTopicScore) && offTopicScore > 0 && !hasProblemTerms)
+        {
+            return "off_topic";
+        }
+
         var bestMatch = categoryScores.OrderByDescending(kvp => kvp.Value).FirstOrDefault();
         if (bestMatch.Value > 0)
         {
