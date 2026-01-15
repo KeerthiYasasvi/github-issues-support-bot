@@ -176,6 +176,15 @@ checklists:
         optional: true
         aliases: [fix, correction, suggestion]
 
+  - category: off_topic
+    completeness_threshold: 0
+    required_fields:
+      - name: issue_description
+        description: Summary of the request
+        weight: 0
+        optional: true
+        aliases: [description, request]
+
   # Custom checklist for Reddit-ELT-Pipeline specific issues
   - category: airflow_dag
     completeness_threshold: 75

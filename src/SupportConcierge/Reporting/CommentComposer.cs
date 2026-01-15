@@ -186,6 +186,31 @@ public class CommentComposer
     }
 
     /// <summary>
+    /// Compose a response for off-topic issues.
+    /// </summary>
+    public string ComposeOffTopicComment(string? username = null)
+    {
+        var sb = new StringBuilder();
+
+        if (!string.IsNullOrEmpty(username))
+        {
+            sb.AppendLine($"@{username}");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine("Thanks for reaching out! This issue appears to be unrelated to this repository.");
+        sb.AppendLine();
+        sb.AppendLine("Please open your issue in the correct project, or include details that clearly tie it to this repo (error message, repro steps, version, and where it happens). ");
+        sb.AppendLine();
+        sb.AppendLine("If you believe this *is* related, reply with: ");
+        sb.AppendLine("- The exact error message");
+        sb.AppendLine("- Steps to reproduce");
+        sb.AppendLine("- Your environment (OS, version)");
+
+        return sb.ToString();
+    }
+
+    /// <summary>
     /// Compose escalation comment when max loops reached.
     /// </summary>
     public string ComposeEscalationComment(

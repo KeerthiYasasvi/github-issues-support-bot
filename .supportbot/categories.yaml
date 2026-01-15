@@ -58,6 +58,20 @@ categories:
       - guide
       - clarification
 
+  - name: off_topic
+    description: Issues unrelated to this repository or general support requests
+    keywords:
+      - unrelated
+      - off topic
+      - off-topic
+      - not about this repo
+      - different project
+      - wrong repository
+      - homework
+      - assignment
+      - general question
+      - chatgpt
+
   # Reddit-ELT-Pipeline specific categories
   - name: airflow_dag
     description: Airflow DAG failures, task issues, or scheduling problems

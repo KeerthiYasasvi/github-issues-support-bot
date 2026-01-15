@@ -183,6 +183,25 @@ public class Orchestrator
             Console.WriteLine($"Determined category: {category}");
         }
 
+        if (category.Equals("off_topic", StringComparison.OrdinalIgnoreCase))
+        {
+            if (currentState == null)
+            {
+                currentState = stateStore.CreateInitialState(category, issueAuthor);
+            }
+
+            currentState.LastUpdated = DateTime.UtcNow;
+            currentState.IsFinalized = true;
+            currentState.FinalizedAt = DateTime.UtcNow;
+
+            var offTopicComment = commentComposer.ComposeOffTopicComment(mentionTarget);
+            var commentWithState = stateStore.EmbedState(offTopicComment, currentState);
+
+            await githubApi.PostCommentAsync(repository.Owner.Login, repository.Name, issue.Number, commentWithState);
+            Console.WriteLine("Posted off-topic response and finalized state.");
+            return;
+        }
+
         // Get checklist for this category
         if (!specPack.Checklists.TryGetValue(category, out var checklist))
         {
