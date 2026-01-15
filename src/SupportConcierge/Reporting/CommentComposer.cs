@@ -198,14 +198,16 @@ public class CommentComposer
             sb.AppendLine();
         }
 
-        sb.AppendLine("Thanks for reaching out! This issue appears to be unrelated to this repository.");
+        sb.AppendLine("Thanks for reaching out! This tracker is for bugs and feature requests. This looks more like a how-to/support question (e.g., build/run/clone/installation).");
         sb.AppendLine();
-        sb.AppendLine("Please open your issue in the correct project, or include details that clearly tie it to this repo (error message, repro steps, version, and where it happens). ");
+        sb.AppendLine("Please check the project docs for setup and usage:");
+        sb.AppendLine("- README (setup/build/run)");
+        sb.AppendLine("- CONTRIBUTING (environment and workflow)");
         sb.AppendLine();
-        sb.AppendLine("If you believe this *is* related, reply with: ");
+        sb.AppendLine("If you believe this *is* a repository issue, please reply with:");
         sb.AppendLine("- The exact error message");
         sb.AppendLine("- Steps to reproduce");
-        sb.AppendLine("- Your environment (OS, version)");
+        sb.AppendLine("- Your environment (OS, versions)");
 
         return sb.ToString();
     }
