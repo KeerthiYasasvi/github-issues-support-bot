@@ -52,16 +52,18 @@ public class Orchestrator
             isStopCommand = body.Contains("/stop", StringComparison.OrdinalIgnoreCase);
 
             var commentAuthor = issue.User.Login;
-            if (!incomingComment.User.Login.Equals(commentAuthor, StringComparison.OrdinalIgnoreCase) && !isDiagnoseCommand)
+            if (!incomingComment.User.Login.Equals(commentAuthor, StringComparison.OrdinalIgnoreCase) && !isDiagnoseCommand && !isStopCommand)
             {
-                Console.WriteLine($"Skipping: Comment from {incomingComment.User.Login} (not from issue author {commentAuthor}) and not a /diagnose command");
+                Console.WriteLine($"Skipping: Comment from {incomingComment.User.Login} (not from issue author {commentAuthor}) and not a /diagnose or /stop command");
                 return;
             }
         }
 
-        var activeParticipant = (eventName == "issue_comment" && isDiagnoseCommand && incomingComment != null)
+        var activeParticipant = (eventName == "issue_comment" && (isDiagnoseCommand || isStopCommand) && incomingComment != null)
             ? incomingComment.User.Login
             : issue.User.Login;
+
+        var mentionTarget = activeParticipant;
 
         Console.WriteLine($"Issue #{issue.Number}: {issue.Title}");
         Console.WriteLine($"Repository: {repository.FullName}");
@@ -110,8 +112,7 @@ public class Orchestrator
         }
 
         // Handle /stop: only issue author can opt out
-        if (eventName == "issue_comment" && isStopCommand && incomingComment != null &&
-            incomingComment.User.Login.Equals(issue.User.Login, StringComparison.OrdinalIgnoreCase))
+        if (eventName == "issue_comment" && isStopCommand && incomingComment != null)
         {
             if (currentState == null)
             {
@@ -122,7 +123,7 @@ public class Orchestrator
             currentState.FinalizedAt = DateTime.UtcNow;
             currentState.LastUpdated = DateTime.UtcNow;
 
-            var stopMessage = $"@{issue.User.Login}\n\nYou've opted out with /stop. I won't ask further questions on this issue. " +
+            var stopMessage = $"@{mentionTarget}\n\nYou've opted out with /stop. I won't ask further questions on this issue. " +
                               "If you need to restart, comment with /diagnose.";
             var commentWithState = stateStore.EmbedState(stopMessage, currentState);
             await githubApi.PostCommentAsync(repository.Owner.Login, repository.Name, issue.Number, commentWithState);
@@ -363,7 +364,8 @@ public class Orchestrator
         state = stateStore.PruneState(state);
 
         // Compose and post comment
-        var commentBody = commentComposer.ComposeFollowUpComment(questions, state.LoopCount, issue.User.Login);
+        var mentionTarget = state.IssueAuthor;
+        var commentBody = commentComposer.ComposeFollowUpComment(questions, state.LoopCount, mentionTarget);
         var commentWithState = stateStore.EmbedState(commentBody, state);
 
         await githubApi.PostCommentAsync(
@@ -443,8 +445,9 @@ public class Orchestrator
         var (_, secretFindings) = secretRedactor.RedactSecrets(allFieldsText);
 
         // Compose and post engineer brief
+        var mentionTarget = state.IssueAuthor;
         var briefComment = commentComposer.ComposeEngineerBrief(
-            brief, scoring, extractedFields, secretFindings, issue.User.Login);
+            brief, scoring, extractedFields, secretFindings, mentionTarget);
 
         // SCENARIO 1 FIX: Mark state as finalized to prevent reprocessing
         state.IsActionable = true;
@@ -614,8 +617,9 @@ This issue may benefit from human review. I'm adding the escalation label for a 
         var dummyScoring = new ScoringResult { Score = 100, IsActionable = true };
         var (redactedFields, secretFindings) = secretRedactor.RedactSecrets(string.Join("\n", extractedFields.Values));
         
+        var mentionTarget = state.IssueAuthor;
         var briefComment = commentComposer.ComposeEngineerBrief(
-            revisedBrief, dummyScoring, extractedFields, secretFindings, issue.User.Login);
+            revisedBrief, dummyScoring, extractedFields, secretFindings, mentionTarget);
 
         briefComment = $@"Thanks for the clarification! Here's a revised approach:
 
