@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$LogPath,
-    [int]$Limit = 50,
+    [int]$Limit = 20,
     [double]$WeightFEA = 0.35,
     [double]$WeightSC = 0.30,
     [double]$WeightRC = 0.25,
