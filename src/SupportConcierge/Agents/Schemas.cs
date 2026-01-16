@@ -80,6 +80,25 @@ public static class Schemas
       ""type"": ""string""
     }
   },
+  ""required"": [
+    ""operating_system"",
+    ""version"",
+    ""runtime_version"",
+    ""build_tool_version"",
+    ""error_message"",
+    ""stack_trace"",
+    ""steps_to_reproduce"",
+    ""expected_behavior"",
+    ""actual_behavior"",
+    ""build_command"",
+    ""build_log"",
+    ""installation_method"",
+    ""input_data"",
+    ""screenshots"",
+    ""doc_location"",
+    ""issue_description"",
+    ""suggested_fix""
+  ],
   ""additionalProperties"": false
 }";
 
