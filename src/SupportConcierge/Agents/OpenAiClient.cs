@@ -33,7 +33,45 @@ public class OpenAiClient
     }
 
     /// <summary>
-    /// Make direct HTTP request to OpenAI API with full parameter control
+    /// Get response format object for API call.
+    /// Uses json_schema (Structured Outputs) if schema is available and model supports it,
+    /// falls back to json_object type for compatibility.
+    /// </summary>
+    private object GetResponseFormat(JsonElement schemaElement, string schemaName)
+    {
+        // Models supporting Structured Outputs: gpt-4o-2024-08-06, gpt-4o-mini, and later
+        bool supportsJsonSchema = _model.Contains("gpt-4o") || _model.Contains("gpt-4-");
+
+        if (supportsJsonSchema && schemaElement.ValueKind != JsonValueKind.Undefined)
+        {
+            try
+            {
+                // Use Structured Outputs with strict schema validation
+                return new
+                {
+                    type = "json_schema",
+                    json_schema = new
+                    {
+                        name = schemaName,
+                        schema = schemaElement,
+                        strict = true
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"[SCHEMA_ENFORCEMENT] Failed to use json_schema format for '{schemaName}': {ex.Message}. Falling back to json_object.");
+            }
+        }
+
+        // Fallback to basic JSON mode (backward compatibility)
+        return new { type = "json_object" };
+    }
+
+    /// <summary>
+    /// Make direct HTTP request to OpenAI API with full parameter control.
+    /// Uses json_schema response format for strict validation when available,
+    /// falls back to json_object type for older models.
     /// </summary>
     private async Task<string> CallOpenAiApiAsync(
         List<ChatMessage> messages,
@@ -41,6 +79,21 @@ public class OpenAiClient
         string schemaName,
         int temperature = 0)
     {
+        // Parse schema for potential use in json_schema response format
+        JsonElement schemaElement = default;
+        try
+        {
+            schemaElement = JsonSerializer.Deserialize<JsonElement>(schemaJson);
+        }
+        catch (JsonException ex)
+        {
+            Console.Error.WriteLine($"[WARNING] Failed to parse schema '{schemaName}' for Structured Outputs: {ex.Message}");
+            // Will fall back to json_object type
+        }
+
+        // Build response format: try json_schema first, fall back to json_object
+        object responseFormat = GetResponseFormat(schemaElement, schemaName);
+
         // Build request payload with explicit model parameter
         var requestBody = new
         {
@@ -51,10 +104,7 @@ public class OpenAiClient
                 content = m.Content
             }).ToList(),
             temperature = temperature,
-            response_format = new
-            {
-                type = "json_object"
-            }
+            response_format = responseFormat
         };
 
         var jsonContent = new StringContent(
@@ -157,16 +207,65 @@ public class OpenAiClient
 
         var content = await CallOpenAiApiAsync(messages, schemaJson, "category_classification");
         
-        var result = JsonSerializer.Deserialize<CategoryClassificationResult>(content);
-
-        // Fallback: choose first configured category (if available) to keep flow moving
-        if (result == null || string.IsNullOrWhiteSpace(result.Category))
+        try
         {
-            var fallbackCategory = (categoryNames != null && categoryNames.Count > 0) ? categoryNames[0] : "bug";
-            return new CategoryClassificationResult { Category = fallbackCategory, Confidence = 0.5 };
-        }
+            var result = JsonSerializer.Deserialize<CategoryClassificationResult>(content);
+            
+            // Validate critical fields
+            if (result != null && string.IsNullOrWhiteSpace(result.Category))
+            {
+                Console.Error.WriteLine($"[SCHEMA_VIOLATION] CategoryClassification response missing 'category' field. Response: {content}");
+            }
+            
+            // Fallback: choose first configured category (if available) to keep flow moving
+            if (result == null || string.IsNullOrWhiteSpace(result.Category))
+            {
+                var fallbackCategory = (categoryNames != null && categoryNames.Count > 0) ? categoryNames[0] : "bug";
+                return new CategoryClassificationResult { Category = fallbackCategory, Confidence = 0.5 };
+            }
 
-        return result;
+            return result;
+        }
+        catch (JsonException ex)
+        {
+            // Telemetry: Track fallback parsing usage
+            Console.Error.WriteLine($"[TELEMETRY] json_deserialization_fallback schema=category_classification error={ex.Message}");
+            
+            // Lenient fallback parsing
+            try
+            {
+                var parsed = JsonSerializer.Deserialize<JsonElement>(content);
+                var result = new CategoryClassificationResult();
+                
+                if (parsed.TryGetProperty("category", out var category))
+                {
+                    result.Category = category.GetString() ?? "bug";
+                }
+                if (parsed.TryGetProperty("confidence", out var confidence) && confidence.ValueKind == JsonValueKind.Number)
+                {
+                    result.Confidence = confidence.GetDouble();
+                }
+                if (parsed.TryGetProperty("reasoning", out var reasoning))
+                {
+                    result.Reasoning = reasoning.GetString() ?? "";
+                }
+                
+                // Validate extracted fields
+                if (string.IsNullOrWhiteSpace(result.Category))
+                {
+                    Console.Error.WriteLine($"[SCHEMA_VIOLATION] CategoryClassification fallback parsing failed to extract 'category'");
+                    result.Category = (categoryNames != null && categoryNames.Count > 0) ? categoryNames[0] : "bug";
+                }
+                
+                return result;
+            }
+            catch (Exception fallbackEx)
+            {
+                Console.Error.WriteLine($"[SCHEMA_VIOLATION] CategoryClassification complete parsing failure: {fallbackEx.Message}");
+                var fallbackCategory = (categoryNames != null && categoryNames.Count > 0) ? categoryNames[0] : "bug";
+                return new CategoryClassificationResult { Category = fallbackCategory, Confidence = 0.5 };
+            }
+        }
     }
 
     /// <summary>
@@ -188,24 +287,66 @@ public class OpenAiClient
 
         var content = await CallOpenAiApiAsync(messages, Schemas.CasePacketExtractionSchema, "case_packet");
         
-        var extracted = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(content) 
-            ?? new Dictionary<string, JsonElement>();
-
-        // Convert to string dictionary, filtering out empty values
-        var result = new Dictionary<string, string>();
-        foreach (var kvp in extracted)
+        try
         {
-            var value = kvp.Value.ValueKind == JsonValueKind.String 
-                ? kvp.Value.GetString() ?? ""
-                : kvp.Value.ToString();
-            
-            if (!string.IsNullOrWhiteSpace(value))
+            var extracted = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(content) 
+                ?? new Dictionary<string, JsonElement>();
+
+            // Convert to string dictionary, filtering out empty values
+            var result = new Dictionary<string, string>();
+            foreach (var kvp in extracted)
             {
-                result[kvp.Key] = value;
+                var value = kvp.Value.ValueKind == JsonValueKind.String 
+                    ? kvp.Value.GetString() ?? ""
+                    : kvp.Value.ToString();
+                
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    result[kvp.Key] = value;
+                }
+            }
+
+            return result;
+        }
+        catch (JsonException ex)
+        {
+            // Telemetry: Track fallback parsing usage
+            Console.Error.WriteLine($"[TELEMETRY] json_deserialization_fallback schema=case_packet error={ex.Message}");
+            
+            // Lenient fallback parsing
+            try
+            {
+                var parsed = JsonSerializer.Deserialize<JsonElement>(content);
+                var result = new Dictionary<string, string>();
+                
+                if (parsed.ValueKind == JsonValueKind.Object)
+                {
+                    foreach (var prop in parsed.EnumerateObject())
+                    {
+                        var value = prop.Value.ValueKind == JsonValueKind.String 
+                            ? prop.Value.GetString() ?? ""
+                            : prop.Value.ToString();
+                        
+                        if (!string.IsNullOrWhiteSpace(value))
+                        {
+                            result[prop.Name] = value;
+                        }
+                    }
+                }
+                
+                if (result.Count < requiredFields.Count)
+                {
+                    Console.Error.WriteLine($"[SCHEMA_VIOLATION] CasePacket extraction found {result.Count} fields, expected {requiredFields.Count}");
+                }
+                
+                return result;
+            }
+            catch (Exception fallbackEx)
+            {
+                Console.Error.WriteLine($"[SCHEMA_VIOLATION] CasePacket complete parsing failure: {fallbackEx.Message}");
+                return new Dictionary<string, string>();
             }
         }
-
-        return result;
     }
 
     /// <summary>
@@ -228,8 +369,58 @@ public class OpenAiClient
 
         var content = await CallOpenAiApiAsync(messages, Schemas.FollowUpQuestionsSchema, "follow_up_questions");
         
-        var result = JsonSerializer.Deserialize<FollowUpQuestionsResponse>(content);
-        return result?.Questions ?? new List<FollowUpQuestion>();
+        try
+        {
+            var result = JsonSerializer.Deserialize<FollowUpQuestionsResponse>(content);
+            
+            // Validate critical fields
+            if (result != null && (result.Questions == null || result.Questions.Count == 0))
+            {
+                Console.Error.WriteLine($"[SCHEMA_VIOLATION] FollowUpQuestions response has no questions. Response: {content}");
+            }
+            
+            return result?.Questions ?? new List<FollowUpQuestion>();
+        }
+        catch (JsonException ex)
+        {
+            // Telemetry: Track fallback parsing usage
+            Console.Error.WriteLine($"[TELEMETRY] json_deserialization_fallback schema=follow_up_questions error={ex.Message}");
+            
+            // Lenient fallback parsing
+            try
+            {
+                var parsed = JsonSerializer.Deserialize<JsonElement>(content);
+                var questions = new List<FollowUpQuestion>();
+                
+                if (parsed.TryGetProperty("questions", out var questionsArray) && questionsArray.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var q in questionsArray.EnumerateArray())
+                    {
+                        var question = new FollowUpQuestion();
+                        if (q.TryGetProperty("field", out var field))
+                            question.Field = field.GetString() ?? "";
+                        if (q.TryGetProperty("question", out var questionText))
+                            question.Question = questionText.GetString() ?? "";
+                        if (q.TryGetProperty("why_needed", out var whyNeeded))
+                            question.Why_Needed = whyNeeded.GetString() ?? "";
+                        questions.Add(question);
+                    }
+                }
+                
+                // Validate extracted fields
+                if (questions.Count == 0)
+                {
+                    Console.Error.WriteLine($"[SCHEMA_VIOLATION] FollowUpQuestions fallback parsing extracted no questions");
+                }
+                
+                return questions;
+            }
+            catch (Exception fallbackEx)
+            {
+                Console.Error.WriteLine($"[SCHEMA_VIOLATION] FollowUpQuestions complete parsing failure: {fallbackEx.Message}");
+                return new List<FollowUpQuestion>();
+            }
+        }
     }
 
     /// <summary>
@@ -263,11 +454,18 @@ public class OpenAiClient
         
         try
         {
-            return JsonSerializer.Deserialize<EngineerBrief>(content) 
+            var result = JsonSerializer.Deserialize<EngineerBrief>(content) 
                 ?? new EngineerBrief();
+            
+            // Validate critical fields
+            ValidateEngineerBrief(result, content);
+            
+            return result;
         }
         catch (JsonException ex)
         {
+            // Telemetry: Track fallback parsing usage
+            Console.Error.WriteLine($"[TELEMETRY] json_deserialization_fallback schema=engineer_brief error={ex.Message}");
             Console.WriteLine($"Error deserializing engineer brief JSON: {ex.Message}");
             Console.WriteLine($"Raw response content:\n{content}");
             
@@ -316,12 +514,15 @@ public class OpenAiClient
                     
                     // Skip possible_duplicates - it's optional
                     
+                    // Validate extracted fields
+                    ValidateEngineerBrief(brief, content);
+                    
                     return brief;
                 }
             }
             catch (Exception innerEx)
             {
-                Console.WriteLine($"Error in lenient parsing: {innerEx.Message}");
+                Console.Error.WriteLine($"[SCHEMA_VIOLATION] Error in engineer brief lenient parsing: {innerEx.Message}");
             }
             
             // Return default brief with error indication
@@ -335,6 +536,45 @@ public class OpenAiClient
                 Next_Steps = new List<string> { "Please review the issue details and resubmit" },
                 Possible_Duplicates = new List<DuplicateReference>()
             };
+        }
+    }
+
+    /// <summary>
+    /// Validate engineer brief has required fields, log warnings if missing.
+    /// </summary>
+    private void ValidateEngineerBrief(EngineerBrief brief, string rawResponse)
+    {
+        if (brief == null)
+            return;
+
+        if (string.IsNullOrWhiteSpace(brief.Summary))
+        {
+            Console.Error.WriteLine($"[SCHEMA_VIOLATION] EngineerBrief missing required 'summary' field. Response: {rawResponse}");
+        }
+
+        if (brief.Symptoms == null || brief.Symptoms.Count == 0)
+        {
+            Console.Error.WriteLine($"[SCHEMA_VIOLATION] EngineerBrief missing required 'symptoms' array");
+        }
+
+        if (brief.Environment == null || brief.Environment.Count == 0)
+        {
+            Console.Error.WriteLine($"[SCHEMA_VIOLATION] EngineerBrief missing required 'environment' object");
+        }
+
+        if (brief.Key_Evidence == null || brief.Key_Evidence.Count == 0)
+        {
+            Console.Error.WriteLine($"[SCHEMA_VIOLATION] EngineerBrief missing required 'key_evidence' array");
+        }
+
+        if (brief.Next_Steps == null || brief.Next_Steps.Count == 0)
+        {
+            Console.Error.WriteLine($"[SCHEMA_VIOLATION] EngineerBrief missing required 'next_steps' array");
+        }
+
+        if (brief.Validation_Confirmations == null || brief.Validation_Confirmations.Count < 2)
+        {
+            Console.Error.WriteLine($"[SCHEMA_VIOLATION] EngineerBrief has fewer than 2 'validation_confirmations' (required minimum 2)");
         }
     }
 
@@ -361,8 +601,52 @@ public class OpenAiClient
         
         Console.WriteLine($"Regenerated Engineer Brief raw response:\n{content}\n");
         
-        return JsonSerializer.Deserialize<EngineerBrief>(content) 
-            ?? new EngineerBrief();
+        try
+        {
+            var result = JsonSerializer.Deserialize<EngineerBrief>(content) 
+                ?? new EngineerBrief();
+            
+            // Validate critical fields
+            ValidateEngineerBrief(result, content);
+            
+            return result;
+        }
+        catch (JsonException ex)
+        {
+            // Telemetry: Track fallback parsing usage
+            Console.Error.WriteLine($"[TELEMETRY] json_deserialization_fallback schema=engineer_brief_regenerate error={ex.Message}");
+            
+            // Fallback parsing
+            try
+            {
+                var parsed = JsonSerializer.Deserialize<JsonElement>(content);
+                var brief = new EngineerBrief();
+                
+                if (parsed.TryGetProperty("summary", out var summary))
+                    brief.Summary = summary.GetString() ?? "";
+                if (parsed.TryGetProperty("symptoms", out var symptoms) && symptoms.ValueKind == JsonValueKind.Array)
+                    brief.Symptoms = symptoms.EnumerateArray()
+                        .Select(s => s.GetString() ?? "").Where(s => !string.IsNullOrEmpty(s)).ToList();
+                if (parsed.TryGetProperty("environment", out var env) && env.ValueKind == JsonValueKind.Object)
+                    brief.Environment = env.EnumerateObject()
+                        .ToDictionary(p => p.Name, p => p.Value.GetString() ?? "");
+                if (parsed.TryGetProperty("key_evidence", out var evidence) && evidence.ValueKind == JsonValueKind.Array)
+                    brief.Key_Evidence = evidence.EnumerateArray()
+                        .Select(s => s.GetString() ?? "").Where(s => !string.IsNullOrEmpty(s)).ToList();
+                if (parsed.TryGetProperty("next_steps", out var steps) && steps.ValueKind == JsonValueKind.Array)
+                    brief.Next_Steps = steps.EnumerateArray()
+                        .Select(s => s.GetString() ?? "").Where(s => !string.IsNullOrEmpty(s)).ToList();
+                
+                ValidateEngineerBrief(brief, content);
+                
+                return brief;
+            }
+            catch (Exception fallbackEx)
+            {
+                Console.Error.WriteLine($"[SCHEMA_VIOLATION] EngineerBrief regeneration complete parsing failure: {fallbackEx.Message}");
+                return new EngineerBrief();
+            }
+        }
     }
 }
 
