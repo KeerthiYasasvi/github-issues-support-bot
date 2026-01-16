@@ -14,6 +14,7 @@ public class Orchestrator
 
     public async Task ProcessEventAsync(string? eventName, JsonElement eventPayload)
     {
+        var processingStartTime = DateTime.UtcNow;
         Console.WriteLine($"Processing event: {eventName}");
 
         // Only process relevant events
@@ -255,6 +256,43 @@ public class Orchestrator
         }
 
         Console.WriteLine("Processing complete.");
+
+        // Export metrics
+        try
+        {
+            var repoPath = Environment.GetEnvironmentVariable("GITHUB_WORKSPACE") ?? Directory.GetCurrentDirectory();
+            var metricsExporter = new MetricsExporter(repoPath);
+            
+            var runMetrics = new RunMetrics
+            {
+                RunId = (int)(DateTime.UtcNow.Ticks / 10000000),
+                IssueNumber = issue.Number,
+                Timestamp = DateTime.UtcNow,
+                Category = category ?? "unknown",
+                Completeness = scoring?.Score ?? 0,
+                FieldsExtracted = extractedFields?.Count ?? 0,
+                TotalFields = checklist?.RequiredFields.Count ?? 0,
+                Actionable = scoring?.IsActionable ?? false,
+                FollowUpRound = currentState?.LoopCount ?? 0,
+                DurationSeconds = (DateTime.UtcNow - processingStartTime).TotalSeconds,
+                IsSuccessful = true,
+                UserResponded = false,
+                IsEscalated = currentState?.IsFinalized ?? false,
+                StopCommandUsed = isStopCommand,
+                DiagnoseCommandUsed = isDiagnoseCommand,
+                EscalateCommandUsed = false,
+                HallucinationCount = 0,
+                HallucinationConfidence = 0.0,
+                IsHallucinationConfirmed = false
+            };
+
+            await metricsExporter.AppendRunMetricsAsync(runMetrics);
+            Console.WriteLine($"Metrics exported for Issue #{issue.Number}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[WARNING] Failed to export metrics: {ex.Message}");
+        }
     }
 
     private async Task<string> DetermineCategoryAsync(
