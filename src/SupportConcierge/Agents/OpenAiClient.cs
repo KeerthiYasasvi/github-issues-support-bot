@@ -22,14 +22,16 @@ public class OpenAiClient
         if (string.IsNullOrEmpty(_apiKey))
             throw new InvalidOperationException("OPENAI_API_KEY not set or empty");
         
-        // Use gpt-4o model which supports response_format
-        _model = "gpt-4o-2024-08-06";
+        // Model selection: allow override via OPENAI_MODEL, fallback to gpt-4o-2024-08-06
+        var envModel = Environment.GetEnvironmentVariable("OPENAI_MODEL")?.Trim();
+        _model = string.IsNullOrEmpty(envModel) ? "gpt-4o-2024-08-06" : envModel;
         
         _httpClient = new HttpClient();
         _httpClient.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiKey);
 
-        Console.WriteLine($"Using OpenAI model: {_model}");
+        var modelSource = string.IsNullOrEmpty(envModel) ? "default" : "env: OPENAI_MODEL";
+        Console.WriteLine($"Using OpenAI model: {_model} (source: {modelSource})");
     }
 
     /// <summary>

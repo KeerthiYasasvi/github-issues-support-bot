@@ -173,3 +173,14 @@ state.json
 # Exclude personal test issues/scenarios
 test-issues/
 my-tests/
+
+# ===============================================
+# GLOBAL MARKDOWN TRACKING RULES
+# ===============================================
+
+# Ignore new Markdown files across the repo except README.md.
+# Note: Already tracked *.md files remain in git; this affects new/untracked files only.
+# Ignore new markdown files globally, but allow README and all docs/*/*.md
+**/*.md
+!README.md
+!docs/**/*.md
