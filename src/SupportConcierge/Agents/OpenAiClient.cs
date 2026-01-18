@@ -38,15 +38,12 @@ public class OpenAiClient
 
     /// <summary>
     /// Get response format object for API call.
-    /// Uses json_schema (Structured Outputs) if schema is available and model supports it,
-    /// falls back to json_object type for compatibility.
+    /// Attempts json_schema (Structured Outputs) when a schema is provided, with strict validation.
+    /// Falls back to json_object type for compatibility if construction fails.
     /// </summary>
     private object GetResponseFormat(JsonElement schemaElement, string schemaName)
     {
-        // Models supporting Structured Outputs: gpt-4o-2024-08-06, gpt-4o-mini, and later
-        bool supportsJsonSchema = _model.Contains("gpt-4o") || _model.Contains("gpt-4-");
-
-        if (supportsJsonSchema && schemaElement.ValueKind != JsonValueKind.Undefined)
+        if (schemaElement.ValueKind != JsonValueKind.Undefined)
         {
             try
             {
@@ -95,8 +92,9 @@ public class OpenAiClient
             // Will fall back to json_object type
         }
 
-        // Build response format: try json_schema first, fall back to json_object
+        // Build response format: try json_schema first, fall back to json_object if server rejects
         object responseFormat = GetResponseFormat(schemaElement, schemaName);
+        bool attemptedSchema = schemaElement.ValueKind != JsonValueKind.Undefined;
 
         // Build request payload with explicit model parameter
         var requestBody = new
@@ -126,7 +124,61 @@ public class OpenAiClient
             {
                 Console.Error.WriteLine($"OpenAI API Error: {response.StatusCode}");
                 Console.Error.WriteLine($"Response: {responseContent}");
-                response.EnsureSuccessStatusCode();
+
+                // Runtime fallback: if json_schema was attempted, retry once with json_object
+                if (attemptedSchema)
+                {
+                    // Telemetry for fallback trigger
+                    Console.Error.WriteLine($"[TELEMETRY] response_format_fallback schema={schemaName} status={(int)response.StatusCode}");
+                    try
+                    {
+                        var errObj = JsonSerializer.Deserialize<JsonElement>(responseContent);
+                        if (errObj.ValueKind == JsonValueKind.Object && errObj.TryGetProperty("error", out var err) && err.ValueKind == JsonValueKind.Object)
+                        {
+                            if (err.TryGetProperty("message", out var msg))
+                            {
+                                Console.Error.WriteLine($"[TELEMETRY] response_format_fallback_reason {msg.GetString()}");
+                            }
+                            if (err.TryGetProperty("type", out var type))
+                            {
+                                Console.Error.WriteLine($"[TELEMETRY] response_format_fallback_type {type.GetString()}");
+                            }
+                        }
+                    }
+                    catch { }
+
+                    Console.Error.WriteLine("[SCHEMA_ENFORCEMENT] Retrying with response_format=json_object due to error.");
+                    var requestBodyFallback = new
+                    {
+                        model = _model,
+                        messages = messages.Select(m => new { role = m.Role, content = m.Content }).ToList(),
+                        temperature = temperature,
+                        response_format = new { type = "json_object" }
+                    };
+
+                    var jsonContentFallback = new StringContent(
+                        JsonSerializer.Serialize(requestBodyFallback),
+                        System.Text.Encoding.UTF8,
+                        "application/json"
+                    );
+
+                    response = await _httpClient.PostAsync(OpenAiApiUrl, jsonContentFallback);
+                    responseContent = await response.Content.ReadAsStringAsync();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.Error.WriteLine($"[TELEMETRY] response_format_fallback_succeeded schema={schemaName}");
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"[TELEMETRY] response_format_fallback_failed schema={schemaName} status={(int)response.StatusCode}");
+                    }
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    response.EnsureSuccessStatusCode();
+                }
             }
 
             var jsonResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);

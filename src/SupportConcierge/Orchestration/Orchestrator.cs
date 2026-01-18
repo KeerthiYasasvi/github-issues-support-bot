@@ -11,6 +11,9 @@ namespace SupportConcierge.Orchestration;
 public class Orchestrator
 {
     private const int MaxLoops = 3;
+    private const int LowCompletenessReaskThreshold = 40;
+    private static readonly TimeSpan ReaskCooldown = TimeSpan.FromHours(24);
+    private static readonly TimeSpan LowCompletenessRetryCooldown = TimeSpan.FromHours(6);
 
     public async Task ProcessEventAsync(string? eventName, JsonElement eventPayload)
     {
@@ -447,8 +450,25 @@ public class Orchestrator
 
         if (missingToAsk.Count == 0)
         {
-            Console.WriteLine("No new fields to ask about (all have been asked)");
-            return;
+            var timeSinceLastUpdate = DateTime.UtcNow - state.LastUpdated;
+            var canReaskByTime = timeSinceLastUpdate >= ReaskCooldown;
+            var canReaskByLowScore = scoring.Score < LowCompletenessReaskThreshold &&
+                                     timeSinceLastUpdate >= LowCompletenessRetryCooldown;
+
+            if (scoring.MissingFields.Count > 0 && (canReaskByTime || canReaskByLowScore))
+            {
+                Console.WriteLine(
+                    $"Re-asking previously requested fields (last asked {timeSinceLastUpdate.TotalHours:F1}h ago, score {scoring.Score}/{scoring.Threshold}).");
+
+                // Allow re-asking the still-missing fields by removing them from AskedFields history
+                state.AskedFields.RemoveAll(f => scoring.MissingFields.Contains(f));
+                missingToAsk = scoring.MissingFields.ToList();
+            }
+            else
+            {
+                Console.WriteLine("No new fields to ask about (all have been asked)");
+                return;
+            }
         }
 
         var issueBody = issue.Body ?? "";

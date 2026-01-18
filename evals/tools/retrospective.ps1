@@ -18,6 +18,21 @@ if (-not $files) {
 
 $results = @()
 
+function Get-PropValue {
+    param(
+        [psobject]$Object,
+        [string]$Name,
+        $Default
+    )
+
+    $prop = $Object.PSObject.Properties[$Name]
+    if ($null -ne $prop) {
+        return $prop.Value
+    }
+
+    return $Default
+}
+
 function Get-JsonLines([string]$path) {
     $content = Get-Content -Raw -Path $path
     if ($path.ToLower().EndsWith('.ndjson')) {
@@ -38,13 +53,13 @@ foreach ($f in $files) {
 
     foreach ($e in $entries) {
         # Expected fields (fallbacks to neutral if missing)
-        $reqTotal   = [double]($e.required_fields_total   ?? 0)
-        $reqCorrect = [double]($e.required_fields_correct ?? 0)
-        $schemaPass = [bool]  ($e.schema_pass            ?? $false)
-        $schemaMinor= [bool]  ($e.schema_minor_violation ?? $false)
-        $sections   = $e.sections_present                # e.g., @{ summary=$true; environment=$false; next_steps=$true }
-        $closedInSlo= [bool]  ($e.closed_in_slo          ?? $false)
-        $reopened   = [bool]  ($e.reopened               ?? $false)
+        $reqTotal   = [double](Get-PropValue -Object $e -Name 'required_fields_total'   -Default 0)
+        $reqCorrect = [double](Get-PropValue -Object $e -Name 'required_fields_correct' -Default 0)
+        $schemaPass = [bool]  (Get-PropValue -Object $e -Name 'schema_pass'             -Default $false)
+        $schemaMinor= [bool]  (Get-PropValue -Object $e -Name 'schema_minor_violation'  -Default $false)
+        $sections   = Get-PropValue -Object $e -Name 'sections_present' -Default $null  # e.g., @{ summary=$true; environment=$false; next_steps=$true }
+        $closedInSlo= [bool]  (Get-PropValue -Object $e -Name 'closed_in_slo'           -Default $false)
+        $reopened   = [bool]  (Get-PropValue -Object $e -Name 'reopened'                -Default $false)
 
         # FEA
         $fea = 0.0
